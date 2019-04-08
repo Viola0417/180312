@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>评测系统登录界面</title>
+</head>
+<body>
+	<section>
+		<form id="loginForm">
+			<ul class='page-content'>
+				<li class='inputBox'>
+					<label for='user_identity'>您的身份：</label>
+					<select class='user_identitys' onChange='window.location=this.value;'>
+						<option value='t_index.html'>老师</option>
+						<option value='s_index.html'>学生</option>
+					</select>
+				</li>
+				<!--  
+				<li class='inputBox'>
+					<label for='user_name'>用户名：</label>
+					<input type="text" class="text_add" id="user_name">
+				</li>
+				<li class='inputBox'>
+					<label for='user_password'>密码：</label>
+					<input type="password" class="text_add" id="user_password">
+			    </li>
+			    -->
+			</ul>
+		</form>
+	</section>
+</body>
+</html>
