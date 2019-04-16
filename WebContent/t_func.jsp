@@ -16,5 +16,10 @@
 		<br/><br/>
 		<input type = "submit" value = "上传">
 	</form>
+<br/><br/>
+<h1>导入数据库</h1><br/><br/>
+	<form method = "post" action = "/111/servlet/UpdateStuServlet">
+		<input type = "submit" value = "导入">
+	</form>
 </body>
 </html>

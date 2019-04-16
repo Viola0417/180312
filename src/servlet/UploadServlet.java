@@ -3,8 +3,11 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
- 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import dao.Student_Dao;
+import entity.Student;
+import service.ReadExcel;
 //import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
@@ -35,7 +42,8 @@ public class UploadServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	private static final String UPLOAD_DIRECTORY = "upload";
+	private static final String UPLOAD_DIRECTORY = "List";
+	private static final String LIST_NAME = "student_list";
 	
 	//上传配置
 	private static final int MEMORY_THRESHOLD = 1024*1024*3;//3MB
@@ -53,8 +61,6 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("zzxdjj");
-	//	doGet(request, response);
 		System.out.println("____________________________________________");
 		//检测是否为多媒体上传
 		if(!ServletFileUpload.isMultipartContent(request)) {
@@ -65,8 +71,6 @@ public class UploadServlet extends HttpServlet {
 			writer.flush();
 			return;
 		}
-		
-		System.out.println("没问题");
 		//配置上传参数
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		//设置内存临界值-超过后将产生临时文件并存储于临时目录
@@ -100,16 +104,40 @@ public class UploadServlet extends HttpServlet {
 					//处理不在表单中的字段
 					if(!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
-						String filePath = uploadPath + File.separator + fileName;
+						String filePath = uploadPath + File.separator + LIST_NAME;
+						System.out.println(filePath);
 						File storeFile = new File(filePath);
 						//在控制台输出文件的上传路径
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
 						request.setAttribute("message", "文件上传成功");
+						//导入数据库
+						System.out.println("现在要开始导入数据库了");
+						Student_Dao s_dao = new Student_Dao();
+						InputStream inputStream = new FileInputStream(filePath);
+						String suffix = "xlsx";
+						int startRow = 1;
+						
+						ReadExcel xlsMain = new ReadExcel();
+						List<Student> list = xlsMain.readXls(inputStream, suffix, startRow);
+						
+						System.out.println("执行结束");
+						
+						for(Student s:list) {
+							System.out.println(s.toString());
+							try {
+								s_dao.addStudent(s);
+							}catch(SQLException e) {
+								e.printStackTrace();
+							}
+						}
+						
 					}
 				}
 			}
+			
+			
 		} catch (Exception e) {
 			request.setAttribute("message", "错误信息："+e.getMessage());
 		}

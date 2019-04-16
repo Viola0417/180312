@@ -25,12 +25,4 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>updateStuServlet</servlet-name>
-    <servlet-class>servlet.updateStuServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>updateStuServlet</servlet-name>
-    <url-pattern>/servlet/updateStuServlet</url-pattern>
-  </servlet-mapping>
 </web-app>
