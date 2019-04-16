@@ -7,6 +7,7 @@ import java.util.List;
 
 import entity.Student;
 //import entity.Teacher;
+import entity.Teacher;
 
 public class Student_Dao {
 	public void addStudent(Student s) throws SQLException {
@@ -90,6 +91,8 @@ public class Student_Dao {
 			s.setS_password(rs.getString("password"));
 			//System.out.println(t.getT_password());
 		}
+		
+		
 		return s;
 	}
 	
@@ -115,6 +118,26 @@ public class Student_Dao {
 			}
 		}
 		return list;
+	}
+	
+	public Student queryByName(String name) throws SQLException {
+		System.out.println("进入query函数");
+		System.out.println(name);
+		Student s = new Student();
+		Connection conn=DbUtil.getConnection();
+		System.out.println("数据库连接成功");
+		String sql=""+"select * from student "+" where name=?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setString(1, name);
+		ResultSet rs=ptmt.executeQuery();
+		//System.out.println(rs);
+		while(rs.next()) {
+			s=new Student();
+			s.setS_name(rs.getString("name"));
+			s.setS_password(rs.getString("password"));
+			//System.out.println(t.getT_password());
+		}
+		return s;
 	}
 }
 

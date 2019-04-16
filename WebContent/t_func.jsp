@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>上传文件</title>
+<title>批量导入学生</title>
 </head>
 <body>
 <jsp:useBean id="logTeacher" class="entity.Teacher" scope="session"/>
@@ -17,9 +17,8 @@
 		<input type = "submit" value = "上传">
 	</form>
 <br/><br/>
-<h1>导入数据库</h1><br/><br/>
-	<form method = "post" action = "/111/servlet/UpdateStuServlet">
-		<input type = "submit" value = "导入">
-	</form>
+
+<h1>上传题目</h1>
+
 </body>
 </html>

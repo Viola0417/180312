@@ -25,4 +25,12 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>StuLoginServlet</servlet-name>
+    <servlet-class>servlet.StuLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StuLoginServlet</servlet-name>
+    <url-pattern>/servlet/StuLoginServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
