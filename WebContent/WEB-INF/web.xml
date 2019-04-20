@@ -25,12 +25,28 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>StuLoginServlet</servlet-name>
     <servlet-class>servlet.StuLoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StuLoginServlet</servlet-name>
     <url-pattern>/servlet/StuLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadTaskDesServlet</servlet-name>
+    <servlet-class>servlet.UploadTaskDesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadTaskDesServlet</servlet-name>
+    <url-pattern>/servlet/UploadTaskDesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>servlet.UploadFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/servlet/UploadFileServlet</url-pattern>
   </servlet-mapping>
 </web-app>

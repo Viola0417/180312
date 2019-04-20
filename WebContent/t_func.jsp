@@ -9,16 +9,19 @@
 <body>
 <jsp:useBean id="logTeacher" class="entity.Teacher" scope="session"/>
 当前用户：<jsp:getProperty name="logTeacher" property="t_name"/><br/>
-<h1>上传文件</h1><br/>
+<h1>批量导入学生</h1><br/>
 	<form method = "post" action = "/111/servlet/UploadServlet" enctype = "multipart/form-data">
-		选择一个文件：
+		选择学生文件导入学生：
 		<input type = "file" name = "uploadFile" />
 		<br/><br/>
 		<input type = "submit" value = "上传">
 	</form>
-<br/><br/>
-
-<h1>上传题目</h1>
-
+	
+	<form method = "post" action = "/111/servlet/UploadTaskDesServlet" name = "task_form">
+		<h1>题目描述</h1>
+		题目标题：<input type='text' id='title_name' name='title_name' style='height:30px;width:220px;font-size:20px;'><br>
+		题目描述：<input type='text' id='description_name' name='description_name' style='height:30px;width:220px;font-size:20px;'><br>
+		<input type = "submit" value = "提交描述">	
+	</form>
 </body>
 </html>
