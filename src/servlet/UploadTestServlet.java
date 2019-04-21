@@ -26,20 +26,20 @@ import dao.Task_Dao;
 /**
  * Servlet implementation class UploadFileServlet
  */
-@WebServlet("/UploadFileServlet")
-public class UploadFileServlet extends HttpServlet {
+@WebServlet("/UploadTestServlet")
+public class UploadTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadFileServlet() {
+    public UploadTestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
 	//private static final String UPLOAD_DIRECTORY = "List";
-	private static final String LIST_NAME = "train";
+	private static final String LIST_NAME = "test";
 	
 	//上传配置
 	private static final int MEMORY_THRESHOLD = 1024*1024*3;//3MB
@@ -116,14 +116,14 @@ public class UploadFileServlet extends HttpServlet {
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
-						response.sendRedirect("../AddTest.jsp");
+						response.sendRedirect("../AddTaskOK.jsp");
 					}
 				}
 			}
 			
 			
 		} catch (Exception e) {
-			response.sendRedirect("../AddTrainFail.jsp");
+			response.sendRedirect("../AddTestFail.jsp");
 		}
 			//跳转到message.jsp
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);

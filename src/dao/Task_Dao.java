@@ -18,7 +18,6 @@ public class Task_Dao {
 		//给sql语句传递参数(从entity动态传参)
 			ptmt.setString(1, t.getT_title());
 			ptmt.setString(2, t.getT_description());
-			//ptmt.setString(3, s.getS_password());
 		//执行sql语句
 			ptmt.execute();
 		}catch(Exception e) {
@@ -44,6 +43,25 @@ public class Task_Dao {
 			e.printStackTrace();
 		}		
 		return id;
+	}
+	
+	public List<Task> query() throws SQLException {
+		System.out.println("进入query函数");
+		Task t = new Task();
+		Connection conn=DbUtil.getConnection();
+		System.out.println("数据库连接成功");
+		String sql=""+"select * from task ";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ResultSet rs=ptmt.executeQuery();
+		List<Task> task = new ArrayList<Task>();
+		while(rs.next()) {
+			t = new Task();
+			t.setT_id(rs.getInt("id"));
+			t.setT_title(rs.getString("title"));
+			t.setT_description(rs.getString("description"));
+			task.add(t);
+		}		
+		return task;
 	}
 	/*
 	public void updateStudent(Student s) throws SQLException {

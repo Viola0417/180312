@@ -49,4 +49,20 @@
     <servlet-name>UploadFileServlet</servlet-name>
     <url-pattern>/servlet/UploadFileServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadTestServlet</servlet-name>
+    <servlet-class>servlet.UploadTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadTestServlet</servlet-name>
+    <url-pattern>/servlet/UploadTestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PrintTaskServlet</servlet-name>
+    <servlet-class>servlet.PrintTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrintTaskServlet</servlet-name>
+    <url-pattern>/servlet/PrintTaskServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

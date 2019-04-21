@@ -4,16 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>老师添加训练集文件</title>
+<title>老师上传训练集失败</title>
 </head>
 <body>
-上传训练集文件
-	<form method = "post" action = "/111/servlet/UploadFileServlet" enctype = "multipart/form-data">
-		上传训练集：
-		<input type = "file" name = "uploadFile" />
-		<br/><br/>
-		<input type = "submit" value = "上传">
-	</form>
-<br/><br/>
+上传失败，请返回重新上传
+<a href = "AddTask.jsp" value = "点击返回"></a>
 </body>
 </html>
