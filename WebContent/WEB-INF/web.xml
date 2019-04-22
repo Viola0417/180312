@@ -65,4 +65,12 @@
     <servlet-name>PrintTaskServlet</servlet-name>
     <url-pattern>/servlet/PrintTaskServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadTaskServlet</servlet-name>
+    <servlet-class>servlet.DownloadTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadTaskServlet</servlet-name>
+    <url-pattern>/servlet/DownloadTaskServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
