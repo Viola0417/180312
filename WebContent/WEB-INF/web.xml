@@ -73,4 +73,20 @@
     <servlet-name>DownloadTaskServlet</servlet-name>
     <url-pattern>/servlet/DownloadTaskServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CompleteTaskServlet</servlet-name>
+    <servlet-class>servlet.CompleteTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompleteTaskServlet</servlet-name>
+    <url-pattern>/servlet/CompleteTaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadAnswerServlet</servlet-name>
+    <servlet-class>servlet.UploadAnswerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadAnswerServlet</servlet-name>
+    <url-pattern>/servlet/UploadAnswerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

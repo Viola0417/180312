@@ -4,14 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生输入题号错误</title>
+<title>学生做答界面</title>
 </head>
 <body>
-<% 
-	String warning = (String)session.getAttribute("warning"); 
-	out.print(warning);
-%>
-请返回重新登录
-
+学生开始做题
+<br>
+请上传你的答案文件
+	<form method = "post" action = "/111/servlet/UploadAnswerServlet" enctype = "multipart/form-data">
+		<input type = "file" name = "uploadFile" />
+		<br/><br/>
+		<input type = "submit" value = "上传">
+	</form>
 </body>
 </html>

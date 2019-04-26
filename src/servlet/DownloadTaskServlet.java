@@ -50,7 +50,7 @@ public class DownloadTaskServlet extends HttpServlet {
 		System.out.println("准备下载task了");
 		request.setCharacterEncoding("utf-8");
 		//System.out.println("处理post请求");
-		task_id=request.getParameter("task_id");
+		task_id=request.getParameter("task_id1");
 		System.out.println(task_id);
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
@@ -86,9 +86,6 @@ public class DownloadTaskServlet extends HttpServlet {
 			//关闭流
 			is.close();
 			os.close();
-			String message = "题目已经下载成功";
-			request.getSession().setAttribute("message", message);
-			request.getRequestDispatcher("../downloadSuc.jsp").forward(request, response);
 		}else {
 			System.out.println("这道题不在数据库中");
 			String warning="题目号码不正确";

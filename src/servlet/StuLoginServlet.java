@@ -56,9 +56,12 @@ public class StuLoginServlet extends HttpServlet {
 				s_temp=s_dao.queryByName(s_name);
 			}
 			
-			System.out.println(s_temp.toString());
+			//System.out.println(s_temp.toString());
 			String db_password=s_temp.getS_password();
-			System.out.println(db_password);
+			//System.out.println(db_password);
+			System.out.println("这个人的学号是："+s_temp.getS_id());
+			//把学生学号存进叫stu_id的session，方便以后servlet使用
+			request.getSession().setAttribute("stu_id",s_temp.getS_id());
 			if(db_password==null) {
 				System.out.println("这个用户名不存在");
 				String warning="这个用户不存在";

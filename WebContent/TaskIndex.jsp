@@ -12,8 +12,16 @@
     request.setCharacterEncoding("UTF-8");
 %>
 <script type='text/javascript'>
-	function login(){
-		var task = document.getElementById('task_id').value;
+	function login_1(){
+		var task = document.getElementById('task_id1').value;
+		if(task == ''||task == null){
+			alert("输入题号不能为空");
+			return false;
+		}
+		return true;
+	}
+	function login_2(){
+		var task = document.getElementById('task_id2').value;
 		if(task == ''||task == null){
 			alert("输入题号不能为空");
 			return false;
@@ -24,8 +32,14 @@
 <body>
 这里应该展示了所有的task<br/>
 请输入你要查看的题目
-	<form method='post' name='task_form' action="/111/servlet/DownloadTaskServlet" onSubmit='return login();'>
-		要下载的题号是：<input type='text' id='task_id' name='task_id' style='height:30px;width:220px;font-size:20px;'><br>
+	<form method='post' name='task_form' action="/111/servlet/DownloadTaskServlet" onSubmit='return login_1();'>
+		要下载的题号是：<input type='text' id='task_id1' name='task_id1' style='height:30px;width:220px;font-size:20px;'><br>
+		<input type='submit' style='height:30px;width:60px;font-size:20px;'>		
+	</form>
+	<br/><br/>
+请输入要做的题目
+	<form method='post' name='task_form' action="/111/servlet/CompleteTaskServlet" onSubmit='return login_2();'>
+		要完成的题号是：<input type='text' id='task_id2' name='task_id2' style='height:30px;width:220px;font-size:20px;'><br>
 		<input type='submit' style='height:30px;width:60px;font-size:20px;'>		
 	</form>
         <table>

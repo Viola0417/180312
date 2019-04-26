@@ -1,30 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.Task_Dao;
 import entity.Task;
+
 /**
- * Servlet implementation class PrintTaskServlet
+ * Servlet implementation class CompleteTaskServlet
  */
-@WebServlet("/PrintTaskServlet")
-public class PrintTaskServlet extends HttpServlet {
+@WebServlet("/CompleteTaskServlet")
+public class CompleteTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrintTaskServlet() {
+    public CompleteTaskServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,28 +38,30 @@ public class PrintTaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession  hs = request.getSession();
-		int stu_id = (int) hs.getAttribute("stu_id");
-		System.out.println("学生学号是："+stu_id);
-		System.out.println("现在要开始查找task");
+		//doGet(request, response);
+		System.out.println("学生准备做答题目");
+		String task_id = null;
+		request.setCharacterEncoding("utf-8");
+		task_id=request.getParameter("task_id2");
+		//System.out.println("学生要做答的是："+task_id+"题目");
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
-		List<Task> taskList = new ArrayList<Task>();
-		try {
-			taskList = t_dao.query();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int TaskNo = 0;
+		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+		//判断输入的题是否在数据库中
+		int enterTask = Integer.parseInt(task_id);
+		if(enterTask<=TaskNo&&enterTask>0) {
+			System.out.println("要做答的题目在数据库中");
+			//把该题目存入session
+			request.getSession().setAttribute("task_id",enterTask);
+			response.sendRedirect("../CompleteTask.jsp");
+			
+		}else {
+			System.out.println("要做答的题目不在数据库中");
+			String warning="题目号码不正确";
+			request.getSession().setAttribute("warning", warning);
+			request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
 		}
-		/*
-		for(Task t2:taskList) {
-			System.out.println(t2.toString());
-		}
-		*/
-		System.out.println("task查找结束");
-		//doGet(request, response);
-		request.setAttribute("tasklist", taskList);
-		request.getRequestDispatcher("/TaskIndex.jsp").forward(request, response);
 	}
 
 }

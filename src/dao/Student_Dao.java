@@ -135,6 +135,7 @@ public class Student_Dao {
 			s=new Student();
 			s.setS_name(rs.getString("name"));
 			s.setS_password(rs.getString("password"));
+			s.setS_id(rs.getInt("id"));
 			//System.out.println(t.getT_password());
 		}
 		return s;
