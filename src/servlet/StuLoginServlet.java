@@ -76,7 +76,7 @@ public class StuLoginServlet extends HttpServlet {
 						System.out.println("密码错误");
 						String warning="用户名与密码不匹配";
 						request.getSession().setAttribute("warning", warning);
-						request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);;
+						request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);
 						//request.getRequestDispatcher("../t_index.jsp").forward(request, response);
 					}
 		    

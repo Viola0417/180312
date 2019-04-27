@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -23,6 +24,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.calculation;
 import service.split;
 import service.ParseTest;
+import dao.Log_Dao;
+import entity.Log;
 
 /**
  * Servlet implementation class UploadAnswerServlet
@@ -195,6 +198,29 @@ public class UploadAnswerServlet extends HttpServlet {
 		double F = 0;
 		F = (R * P) / (R + P);
 		System.out.println("F是："+F);
+		//System.out.println("执行结束");
+		
+		//把结果插入log数据库
+		Log l = new Log();
+		Log_Dao l_dao = new Log_Dao();
+		l.setStu_id(stu_id);
+		l.setTask_id(task_id);
+		l.setF(F);
+		l.setP(P);
+		l.setR(R);
+		try {
+			l_dao.addLog(l);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
+		String F_str = String.valueOf(F);
+		String R_str = String.valueOf(R);
+		String P_str = String.valueOf(P);
+		request.getSession().setAttribute("F", F_str);
+		request.getSession().setAttribute("R", F_str);
+		request.getSession().setAttribute("P", F_str);
+		request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);;
 		System.out.println("执行结束");
 	}
 
