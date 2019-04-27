@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>上传结束</title>
+<title>学生上传答案失败</title>
 </head>
 <body>
-本题目已经完全上传完毕
+学生上传答案失败
 </body>
 </html>

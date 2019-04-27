@@ -89,4 +89,12 @@
     <servlet-name>UploadAnswerServlet</servlet-name>
     <url-pattern>/servlet/UploadAnswerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>T_UploadAnswerServlet</servlet-name>
+    <servlet-class>servlet.T_UploadAnswerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>T_UploadAnswerServlet</servlet-name>
+    <url-pattern>/servlet/T_UploadAnswerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

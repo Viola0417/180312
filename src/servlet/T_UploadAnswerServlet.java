@@ -1,9 +1,7 @@
 package servlet;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,34 +16,30 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import entity.Student;
 import entity.Task;
-import service.ReadExcel;
-import dao.Student_Dao;
 import dao.Task_Dao;
+
 /**
- * Servlet implementation class UploadFileServlet
+ * Servlet implementation class UploadTaskDesServlet
  */
-@WebServlet("/UploadTestServlet")
-public class UploadTestServlet extends HttpServlet {
+@WebServlet("/T_UploadAnswerServlet")
+public class T_UploadAnswerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadTestServlet() {
+    public T_UploadAnswerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
-	//private static final String UPLOAD_DIRECTORY = "List";
-	private static final String LIST_NAME = "test";
+	private static final String LIST_NAME = "answer";
 	
 	//上传配置
 	private static final int MEMORY_THRESHOLD = 1024*1024*3;//3MB
 	private static final int MAX_FILE_SIZE = 1024*1024*40;//40MB
 	private static final int MAX_REQUEST_SIZE = 1024*1024*50;//50MB
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -60,8 +54,8 @@ public class UploadTestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("开始上传训练集");
-		Task t = new Task();
+		System.out.println("老师上传答案文件");
+		//Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
 		int TaskNo = 0;
 		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
@@ -108,7 +102,7 @@ public class UploadTestServlet extends HttpServlet {
 				for(FileItem item:formItems) {
 					//处理不在表单中的字段
 					if(!item.isFormField()) {
-						String fileName = new File(item.getName()).getName();
+						//String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator + LIST_NAME;
 						System.out.println(filePath);
 						File storeFile = new File(filePath);
@@ -116,7 +110,7 @@ public class UploadTestServlet extends HttpServlet {
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
-						response.sendRedirect("../T_UploadAnswer.jsp");
+						response.sendRedirect("../AddTaskOK.jsp");
 					}
 				}
 			}
@@ -129,5 +123,5 @@ public class UploadTestServlet extends HttpServlet {
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);
 		//request.getServletContext().getRequestDispatcher("/uptaskmsg.jsp").forward(request,response);
 		}
-	}
 
+}
