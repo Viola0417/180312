@@ -80,10 +80,11 @@ public class ReadExcel {
 				Student s = new Student();
 				Cell name = row.getCell(0);
 				Cell id = row.getCell(1);
-				Cell password = row.getCell(2);
+				//Cell password = row.getCell(2);
+				//初始化学生的密码就是他的学号
 				s.setS_name(parseCell(name));
 				s.setS_id(Integer.valueOf(parseCell(id)));
-				s.setS_password(parseCell(password));
+				s.setS_password(parseCell(id));
 				stuList.add(s);
 
 			}

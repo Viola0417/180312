@@ -102,7 +102,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		//这个路径相对当前应用的目录
 		STU_DIRECTORY = String.valueOf(stu_id);
 		TASK_DIRECTORY = String.valueOf(task_id);
-		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+STU_DIRECTORY+TASK_DIRECTORY;
+		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+STU_DIRECTORY+"_"+TASK_DIRECTORY;
 		System.out.println("学生上传答案的路径是:"+uploadPath);	
 		//如果目录不存在就创建
 		File uploadDir = new File(uploadPath);
