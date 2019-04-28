@@ -66,7 +66,7 @@ public class StuLoginServlet extends HttpServlet {
 				System.out.println("这个用户名不存在");
 				String warning="这个用户不存在";
 				request.getSession().setAttribute("warning", warning);
-				request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);;
+				request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);
 				}else if(db_password.equals(s_password)) {
 					System.out.println("密码一致");
 					request.getSession().setAttribute("logStudent", s_temp);

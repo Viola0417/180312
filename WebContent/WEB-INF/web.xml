@@ -97,4 +97,12 @@
     <servlet-name>T_UploadAnswerServlet</servlet-name>
     <url-pattern>/servlet/T_UploadAnswerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>StuUpdatePwdServlet</servlet-name>
+    <servlet-class>servlet.StuUpdatePwdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StuUpdatePwdServlet</servlet-name>
+    <url-pattern>/servlet/StuUpdatePwdServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
