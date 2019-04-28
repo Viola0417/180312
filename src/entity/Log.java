@@ -12,6 +12,21 @@ public class Log {
 	private double P;
 	private Timestamp time;
 	
+	public Log() {
+		
+	}
+	
+	public Log(int log_id,int stu_id,int task_id,String description,double F,double R,double P,Timestamp time) {
+		this.log_id = log_id;
+		this.stu_id = stu_id;
+		this.task_id = task_id;
+		this.description = description;
+		this.F = F;
+		this.R = R;
+		this.P = P;
+		this.time = time;
+	}
+	
 	public String toString() {
 		return "Log[log_id="+log_id+",stu_id="+stu_id+",task_id="+task_id+"description="+description+"F="+F+"R="+R+"P="+P+"time="+time+"]";
 	}

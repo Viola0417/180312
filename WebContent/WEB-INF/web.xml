@@ -105,4 +105,20 @@
     <servlet-name>StuUpdatePwdServlet</servlet-name>
     <url-pattern>/servlet/StuUpdatePwdServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowTaskRankServlet</servlet-name>
+    <servlet-class>servlet.ShowTaskRankServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowTaskRankServlet</servlet-name>
+    <url-pattern>/servlet/ShowTaskRankServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowStuRankServlet</servlet-name>
+    <servlet-class>servlet.ShowStuRankServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowStuRankServlet</servlet-name>
+    <url-pattern>/servlet/ShowStuRankServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

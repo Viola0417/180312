@@ -7,13 +7,24 @@
 <title>学生查看结果</title>
 </head>
 <body>
+<h1>您已经完成了做答</h1>
+<br/><br/>
+计算的召回率recall是：
 <% 
-	String F = (String)session.getAttribute("F"); 
-	String P = (String)session.getAttribute("P"); 
 	String R = (String)session.getAttribute("R"); 
-	out.print(F);
-	out.print(P);
 	out.print(R);
+%>
+<br/>
+计算的准确率precision是：
+<%
+	String P = (String)session.getAttribute("P");
+	out.print(P);
+%>
+<br/>
+综合的F是：
+<%
+	String F = (String)session.getAttribute("F");
+	out.print(F);
 %>
 </body>
 </html>

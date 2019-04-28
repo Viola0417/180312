@@ -23,5 +23,11 @@
 		题目描述：<input type='text' id='description_name' name='description_name' style='height:30px;width:220px;font-size:20px;'><br>
 		<input type = "submit" value = "提交描述">	
 	</form>
+	
+	<h1>查看学生做答情况</h1>
+	<form method='get' action="../SelectRank.jsp">
+		<input type='submit' value='查看排名' style='height:30px;width:60px;font-size:20px;'>		
+	</form>
+	
 </body>
 </html>

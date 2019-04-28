@@ -20,12 +20,17 @@ public class LogAction {
 		l.setDescription("第二次尝试");
 		l_dao.addLog(l);
 		*/
-		
+		/*
 		//查找记录测试
 		log_list = l_dao.query();
 		for(Log l1:log_list) {
 			System.out.println(l1.toString());
-		}
+		}*/
+		int stu_id = 20154443;
+		int task_id = 22;
+		int res = 0;
+		res = l_dao.CheckLogByStu(stu_id);
+		//res = l_dao.CheckLogByTask(task_id);
 		System.out.println("执行结束");
 	}
 }

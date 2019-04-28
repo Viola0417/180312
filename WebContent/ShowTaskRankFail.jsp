@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>老师登录失败</title>
+<title>显示题目记录失败</title>
 </head>
 <body>
 <% 
@@ -12,4 +12,3 @@
 %>
 <strong>请返回重新登录</strong>
 </body>
-</html>

@@ -140,5 +140,20 @@ public class Student_Dao {
 		}
 		return s;
 	}
+	
+	public int CheckLogByStu(int id) throws SQLException {
+		int res = 0;
+		System.out.println("根据学号判断该同学是否存在");
+		Connection conn=DbUtil.getConnection();
+		String sql="select COUNT(*) from student where id="+"?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setInt(1,id);
+		ResultSet rs=ptmt.executeQuery();
+		while(rs.next()) {
+			res = rs.getInt(1);
+		}
+		//System.out.println("select count结果是："+res);
+		return res;
+	}
 }
 
