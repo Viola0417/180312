@@ -16,16 +16,17 @@ public class Log_Dao {
 		try {
 			System.out.println("在向数据库写入做题记录");
 			Connection conn=DbUtil.getConnection();
-			String sql=""+"insert into log"+"(stu_id,task_id,description,F,R,P,time)"+"values("+"?,?,?,?,?,?,now())";
+			String sql=""+"insert into log"+"(stu_id,task_id,description,algo,F,R,P,time)"+"values("+"?,?,?,?,?,?,?,now())";
 		//将sql语句加载到驱动程序，但不执行
 			PreparedStatement ptmt=conn.prepareStatement(sql);
 		//给sql语句传递参数(从entity动态传参)
 			ptmt.setInt(1, l.getStu_id());
 			ptmt.setInt(2, l.getTask_id());
 			ptmt.setString(3, l.getDescription());
-			ptmt.setDouble(4, l.getF());
-			ptmt.setDouble(5, l.getR());
-			ptmt.setDouble(6, l.getP());
+			ptmt.setString(4, l.getAlgo());
+			ptmt.setDouble(5, l.getF());
+			ptmt.setDouble(6, l.getR());
+			ptmt.setDouble(7, l.getP());
 		//执行sql语句
 			ptmt.execute();
 		}catch(Exception e) {
@@ -51,6 +52,7 @@ public class Log_Dao {
 			l.setP(rs.getDouble("P"));
 			l.setR(rs.getDouble("R"));
 			l.setDescription(rs.getString("description"));
+			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
@@ -123,6 +125,7 @@ public class Log_Dao {
 			l.setP(rs.getDouble("P"));
 			l.setR(rs.getDouble("R"));
 			l.setDescription(rs.getString("description"));
+			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
@@ -148,6 +151,7 @@ public class Log_Dao {
 			l.setP(rs.getDouble("P"));
 			l.setR(rs.getDouble("R"));
 			l.setDescription(rs.getString("description"));
+			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
@@ -193,6 +197,7 @@ public class Log_Dao {
 			l.setP(rs.getDouble("P"));
 			l.setR(rs.getDouble("R"));
 			l.setDescription(rs.getString("description"));
+			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
@@ -216,6 +221,7 @@ public class Log_Dao {
 			l.setP(rs.getDouble("P"));
 			l.setR(rs.getDouble("R"));
 			l.setDescription(rs.getString("description"));
+			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 		}	
 		return l;

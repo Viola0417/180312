@@ -7,6 +7,7 @@ public class Log {
 	private int stu_id;
 	private int task_id;
 	private String description;
+	private String algo;
 	private double F;
 	private double R;
 	private double P;
@@ -16,11 +17,12 @@ public class Log {
 		
 	}
 	
-	public Log(int log_id,int stu_id,int task_id,String description,double F,double R,double P,Timestamp time) {
+	public Log(int log_id,int stu_id,int task_id,String description,String algo,double F,double R,double P,Timestamp time) {
 		this.log_id = log_id;
 		this.stu_id = stu_id;
 		this.task_id = task_id;
 		this.description = description;
+		this.algo = algo;
 		this.F = F;
 		this.R = R;
 		this.P = P;
@@ -28,7 +30,7 @@ public class Log {
 	}
 	
 	public String toString() {
-		return "Log[log_id="+log_id+",stu_id="+stu_id+",task_id="+task_id+"description="+description+"F="+F+"R="+R+"P="+P+"time="+time+"]";
+		return "Log[log_id="+log_id+",stu_id="+stu_id+",task_id="+task_id+"description="+description+"algo="+algo+"F="+F+"R="+R+"P="+P+"time="+time+"]";
 	}
 
 	public int getLog_id() {
@@ -61,6 +63,14 @@ public class Log {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getAlgo() {
+		return algo;
+	}
+
+	public void setAlgo(String algo) {
+		this.algo = algo;
 	}
 
 	public double getF() {

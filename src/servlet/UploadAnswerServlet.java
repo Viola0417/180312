@@ -65,15 +65,16 @@ public class UploadAnswerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
-		System.out.println("处理学生上传上来的题目，并且把比对的结果存进log表");
+		//System.out.println("处理学生上传上来的题目，并且把比对的结果存进log表");
 		HttpSession  hs = request.getSession();
 		
 		int stu_id = (int) hs.getAttribute("stu_id");
 		//HttpSession  hs = request.getSession();
 		int task_id = (int) hs.getAttribute("task_id");
-		System.out.println("当前学生的学号是:"+stu_id+"，他做答的题目是："+task_id);
+		String algo = (String) hs.getAttribute("algo");
+		String description = (String) hs.getAttribute("description");
+		System.out.println(algo+"   "+description);
+		//System.out.println("当前学生的学号是:"+stu_id+"，他做答的题目是："+task_id);
 		
 		
 		//先上传学生的做答文件
@@ -105,7 +106,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		STU_DIRECTORY = String.valueOf(stu_id);
 		TASK_DIRECTORY = String.valueOf(task_id);
 		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+STU_DIRECTORY+"_"+TASK_DIRECTORY;
-		System.out.println("学生上传答案的路径是:"+uploadPath);	
+		//System.out.println("学生上传答案的路径是:"+uploadPath);	
 		//如果目录不存在就创建
 		File uploadDir = new File(uploadPath);
 		if(!uploadDir.exists()) {
@@ -122,10 +123,10 @@ public class UploadAnswerServlet extends HttpServlet {
 					if(!item.isFormField()) {
 						//String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator + LIST_NAME;
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						File storeFile = new File(filePath);
 						//在控制台输出文件的上传路径
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
 						//.sendRedirect("../T_UploadAnswer.jsp");
@@ -140,10 +141,10 @@ public class UploadAnswerServlet extends HttpServlet {
 		
 		//对比测试集标准答案与学生上传的答案
 		String f_path_1 = request.getServletContext().getRealPath("./")+File.separator+TASK_DIRECTORY+File.separator+ANSWER;
-		System.out.println("标准答案文件地址："+f_path_1);
+		//System.out.println("标准答案文件地址："+f_path_1);
 		InputStream inputStream_1 = new FileInputStream(f_path_1);
 		String f_path_2 = uploadPath + File.separator + LIST_NAME;
-		System.out.println("学生上传答案地址:"+f_path_2);
+		//System.out.println("学生上传答案地址:"+f_path_2);
 		InputStream inputStream_2 = new FileInputStream(f_path_2);
 		String suffix = "xlsx";
 		int startRow = 0;
@@ -176,8 +177,8 @@ public class UploadAnswerServlet extends HttpServlet {
 			precision_list.add(precision);
 		}
 		
-		System.out.println("准确率是："+precision_list);
-		System.out.println("召回率是："+recall_list);
+		//System.out.println("准确率是："+precision_list);
+		//System.out.println("召回率是："+recall_list);
 		//计算最后的准确率P
 		double P = 0;
 		double sum = 0;
@@ -185,7 +186,7 @@ public class UploadAnswerServlet extends HttpServlet {
 			sum = sum + precision_list.get(i);
 		}
 		P = sum / (double)precision_list.size();
-		System.out.println("准确率是："+P);
+		//System.out.println("准确率是："+P);
 		
 		//计算最后的召回率R
 		double R = 0;
@@ -194,17 +195,19 @@ public class UploadAnswerServlet extends HttpServlet {
 			sum = sum + recall_list.get(i);
 		}
 		R = sum / (double)recall_list.size();
-		System.out.println("召回率是："+R);
+		//System.out.println("召回率是："+R);
 		
 		//计算F
 		double F = 0;
 		F = (R * P) / (R + P);
-		System.out.println("F是："+F);
+		//System.out.println("F是："+F);
 		//System.out.println("执行结束");
 		
 		//把结果插入log数据库
 		Log l = new Log();
 		Log_Dao l_dao = new Log_Dao();
+		l.setAlgo(algo);
+		l.setDescription(description);
 		l.setStu_id(stu_id);
 		l.setTask_id(task_id);
 		l.setF(F);
@@ -224,17 +227,17 @@ public class UploadAnswerServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		String F_str = String.valueOf(F);
-		System.out.println("F_str是："+F_str);
+		//System.out.println("F_str是："+F_str);
 		String R_str = String.valueOf(R);
 		String P_str = String.valueOf(P);
 		String FF = (String) hs.getAttribute("F");
-		System.out.println("原来的F是:"+FF);
+		//System.out.println("原来的F是:"+FF);
 		hs.removeAttribute("F");
 		hs.removeAttribute("R");
 		hs.removeAttribute("P");
 		request.getSession().setAttribute("F", F_str);
 		FF = (String)hs.getAttribute("F");
-		System.out.println("现在的F是:"+FF);
+		//System.out.println("现在的F是:"+FF);
 		request.getSession().setAttribute("R", R_str);
 		request.getSession().setAttribute("P", P_str);
 		
@@ -243,7 +246,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		//现在本题有多少条记录
 		try {
 			int log_num = l_dao.CheckLogByTask(task_id);
-			System.out.println("现在这道题有"+log_num+"条记录");
+			//System.out.println("现在这道题有"+log_num+"条记录");
 			String log_num_str = String.valueOf(log_num);
 			hs.removeAttribute("log_num");
 			request.getSession().setAttribute("log_num", log_num_str);
@@ -254,7 +257,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		//现在有多少人做过这道题
 		try {
 			int log_dis_num = l_dao.CheckDisLogByTask(task_id);
-			System.out.println("现在这道题有"+log_dis_num+"个学生做答过");
+			//System.out.println("现在这道题有"+log_dis_num+"个学生做答过");
 			String log_dis_num_str = String.valueOf(log_dis_num);
 			hs.removeAttribute("log_dis_num");
 			request.getSession().setAttribute("log_dis_num", log_dis_num_str);
@@ -264,9 +267,9 @@ public class UploadAnswerServlet extends HttpServlet {
 		}
 		//计算现在的结果在所有记录中排第几
 		try {
-			System.out.println("l的各个值"+l.getF()+l.getTask_id()+l.getStu_id());
+			//System.out.println("l的各个值"+l.getF()+l.getTask_id()+l.getStu_id());
 			int log_rank = c.Cal_Log_Rank(l);
-			System.out.println("在所有做答本题的log记录中排名为："+log_rank);
+			//System.out.println("在所有做答本题的log记录中排名为："+log_rank);
 			String log_rank_str = String.valueOf(log_rank);
 			hs.removeAttribute("log_rank");
 			request.getSession().setAttribute("log_rank", log_rank_str);
@@ -276,7 +279,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		}
 		try {
 			int stu_rank = c.Cal_Stu_Rank(l);
-			System.out.println("在所有做答本题的学生记录中排名为："+stu_rank);
+			//System.out.println("在所有做答本题的学生记录中排名为："+stu_rank);
 			String stu_rank_str = String.valueOf(stu_rank);
 			hs.removeAttribute("stu_rank");
 			request.getSession().setAttribute("stu_rank", stu_rank_str);
@@ -286,7 +289,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);
-		System.out.println("执行结束");
+		//System.out.println("执行结束");
 	}
 
 }

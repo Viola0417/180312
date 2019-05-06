@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		System.out.println("处理post请求");
+		//System.out.println("处理post请求");
 		//Teacher t = new Teacher();
 		//Connection con=null;
 		try {

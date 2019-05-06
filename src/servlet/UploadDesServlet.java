@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Task_Dao;
-import entity.Task;
+import dao.Teacher_Dao;
+import entity.Teacher;
 
 /**
- * Servlet implementation class CompleteTaskServlet
+ * Servlet implementation class UploadDesServlet
  */
-@WebServlet("/CompleteTaskServlet")
-public class CompleteTaskServlet extends HttpServlet {
+@WebServlet("/UploadDesServlet")
+public class UploadDesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompleteTaskServlet() {
+    public UploadDesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,29 +39,12 @@ public class CompleteTaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("学生准备做答题目");
-		String task_id = null;
 		request.setCharacterEncoding("utf-8");
-		task_id=request.getParameter("task_id2");
-		//System.out.println("学生要做答的是："+task_id+"题目");
-		Task t = new Task();
-		Task_Dao t_dao = new Task_Dao();
-		int TaskNo = 0;
-		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
-		//判断输入的题是否在数据库中
-		int enterTask = Integer.parseInt(task_id);
-		if(enterTask<=TaskNo&&enterTask>0) {
-			System.out.println("要做答的题目在数据库中");
-			//把该题目存入session
-			request.getSession().setAttribute("task_id",enterTask);
-			response.sendRedirect("../s_addalgo.jsp");
-			
-		}else {
-			System.out.println("要做答的题目不在数据库中");
-			String warning="题目号码不正确";
-			request.getSession().setAttribute("warning", warning);
-			request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
-		}
+		String algo=request.getParameter("algo");
+		String description=request.getParameter("description");
+		System.out.println(algo+"    "+description);
+		request.getSession().setAttribute("algo",algo);
+		request.getSession().setAttribute("description",description);
+		response.sendRedirect("../CompleteTask.jsp");
 	}
-
 }

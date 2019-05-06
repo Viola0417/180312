@@ -26,7 +26,7 @@
 	String F = (String)session.getAttribute("F");
 	out.print(F);
 %>
-<br/>
+<br/><br/>
 这道题做答记录为：
 <%
 	String log_num = (String)session.getAttribute("log_num");

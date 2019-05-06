@@ -10,6 +10,14 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>UploadDesServlet</servlet-name>
+    <servlet-class>servlet.UploadDesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadDesServlet</servlet-name>
+    <url-pattern>/servlet/UploadDesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>servlet.UploadServlet</servlet-class>
   </servlet>
