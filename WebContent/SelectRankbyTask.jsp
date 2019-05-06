@@ -17,7 +17,7 @@
 	}
 </script>
 <body>
-请输入你要查看题目的题号
+请输入你要下载题目的题号
 	<form method='post' name='task_form' action="/111/servlet/ShowTaskRankServlet" onSubmit='return check();'>
 		要下载的题号是：<input type='text' id='task_id' name='task_id' style='height:30px;width:220px;font-size:20px;'><br>
 		<input type='submit' style='height:30px;width:60px;font-size:20px;'>		

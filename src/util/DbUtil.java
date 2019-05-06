@@ -11,9 +11,10 @@ public class DbUtil {
 			//1.加载驱动程序
             Class.forName("com.mysql.cj.jdbc.Driver");
             //2.获得数据库的连接
+            //jdbc:mysql://localhost:3306/testloc?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
             connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/test_system?serverTimezone" +
-                            "=UTC&characterEncoding=utf-8&useSSL=false", "root", "970417jly");
+                            "=Asia/Shanghai&characterEncoding=utf-8&useSSL=false", "root", "970417jly");
             System.out.println("数据库已成功连接");
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();

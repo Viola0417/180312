@@ -26,5 +26,27 @@
 	String F = (String)session.getAttribute("F");
 	out.print(F);
 %>
+<br/>
+这道题做答记录为：
+<%
+	String log_num = (String)session.getAttribute("log_num");
+	out.print(log_num);
+%>
+这道题做答人数为：
+<%
+	String log_dis_num = (String)session.getAttribute("log_dis_num");
+	out.print(log_dis_num);
+%>
+<br/>
+在所有回答本题的记录中F的排名为：
+<%
+	String log_rank = (String)session.getAttribute("log_rank");
+	out.print(log_rank);
+%>
+在所有回答本题的学生中F的排名为：
+<%
+	String stu_rank = (String)session.getAttribute("stu_rank");
+	out.print(stu_rank);
+%>
 </body>
 </html>

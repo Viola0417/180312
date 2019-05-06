@@ -12,7 +12,7 @@
     request.setCharacterEncoding("UTF-8");
 %>
 <body>
-<h1>本题的完成情况</h1>
+<h1>本学生的所有做答情况</h1>
 	<table>
 		<c:forEach items="${log_list}" var="log">
 		<tbody>

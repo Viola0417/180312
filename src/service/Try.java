@@ -1,6 +1,7 @@
 package service;
 
 import dao.Student_Dao;
+import entity.Log;
 import entity.Student;
 import service.ReadExcel;
 import java.io.FileInputStream;
@@ -12,27 +13,15 @@ import java.util.List;
 
 public class Try {
 	public static void main(String[] args) throws Exception {
-		Student_Dao s_dao = new Student_Dao();
-		//ParseExcel parser = new ParseExcel();
-		InputStream inputStream = new FileInputStream("stu.xlsx");
-		String suffix = "xlsx";
-		int startRow = 1;
-	
-		//List<String[]> result = 
-					//parser.parseExcel(inputStream, suffix, startRow);
-		ReadExcel xlsMain = new ReadExcel();
-		//Student student = null;
-		List<Student> list = xlsMain.readXls(inputStream,suffix,startRow);
-		
+		Log l = new Log();
+		l.setF(0.3);
+		l.setStu_id(20154488);
+		l.setLog_id(20);
+		l.setTask_id(53);
+		calculation c = new calculation();
+		int rank = 0;
+		//rank = c.Cal_Log_Rank(l);
+		rank = c.Cal_Stu_Rank(l);
 		System.out.println("执行结束");
-		
-		for(Student s : list){
-			System.out.println(s.toString());
-			s_dao.addStudent(s);
-			
-		}
-		System.out.println("执行结束");
-		
-		
 	}
 }

@@ -66,8 +66,10 @@ public class UploadAnswerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
 		System.out.println("处理学生上传上来的题目，并且把比对的结果存进log表");
 		HttpSession  hs = request.getSession();
+		
 		int stu_id = (int) hs.getAttribute("stu_id");
 		//HttpSession  hs = request.getSession();
 		int task_id = (int) hs.getAttribute("task_id");
@@ -214,13 +216,76 @@ public class UploadAnswerServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}				
+		try {
+			//得到新添加记录的所有信息
+			l = l_dao.CheckLastLog();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String F_str = String.valueOf(F);
+		System.out.println("F_str是："+F_str);
 		String R_str = String.valueOf(R);
 		String P_str = String.valueOf(P);
+		String FF = (String) hs.getAttribute("F");
+		System.out.println("原来的F是:"+FF);
+		hs.removeAttribute("F");
+		hs.removeAttribute("R");
+		hs.removeAttribute("P");
 		request.getSession().setAttribute("F", F_str);
-		request.getSession().setAttribute("R", F_str);
-		request.getSession().setAttribute("P", F_str);
-		request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);;
+		FF = (String)hs.getAttribute("F");
+		System.out.println("现在的F是:"+FF);
+		request.getSession().setAttribute("R", R_str);
+		request.getSession().setAttribute("P", P_str);
+		
+		//System.out.println("执行结束");
+		//要得到学生的排名
+		//现在本题有多少条记录
+		try {
+			int log_num = l_dao.CheckLogByTask(task_id);
+			System.out.println("现在这道题有"+log_num+"条记录");
+			String log_num_str = String.valueOf(log_num);
+			hs.removeAttribute("log_num");
+			request.getSession().setAttribute("log_num", log_num_str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//现在有多少人做过这道题
+		try {
+			int log_dis_num = l_dao.CheckDisLogByTask(task_id);
+			System.out.println("现在这道题有"+log_dis_num+"个学生做答过");
+			String log_dis_num_str = String.valueOf(log_dis_num);
+			hs.removeAttribute("log_dis_num");
+			request.getSession().setAttribute("log_dis_num", log_dis_num_str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//计算现在的结果在所有记录中排第几
+		try {
+			System.out.println("l的各个值"+l.getF()+l.getTask_id()+l.getStu_id());
+			int log_rank = c.Cal_Log_Rank(l);
+			System.out.println("在所有做答本题的log记录中排名为："+log_rank);
+			String log_rank_str = String.valueOf(log_rank);
+			hs.removeAttribute("log_rank");
+			request.getSession().setAttribute("log_rank", log_rank_str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			int stu_rank = c.Cal_Stu_Rank(l);
+			System.out.println("在所有做答本题的学生记录中排名为："+stu_rank);
+			String stu_rank_str = String.valueOf(stu_rank);
+			hs.removeAttribute("stu_rank");
+			request.getSession().setAttribute("stu_rank", stu_rank_str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);
 		System.out.println("执行结束");
 	}
 

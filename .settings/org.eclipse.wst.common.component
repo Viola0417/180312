@@ -2,6 +2,7 @@
     <wb-module deploy-name="111">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
         <property name="context-root" value="111"/>
         <property name="java-output-path" value="/111/build/classes"/>
     </wb-module>
