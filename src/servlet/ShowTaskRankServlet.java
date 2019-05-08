@@ -78,10 +78,11 @@ public class ShowTaskRankServlet extends HttpServlet {
 					for(Log l:log_list) {
 						System.out.println(l.toString());
 					}
-					request.setAttribute("log_list", log_list);
+					request.getSession().setAttribute("log_list", log_list);
 					//String message = "为什么传不过来";
 					//request.getSession().setAttribute("message", message);
-					request.getRequestDispatcher("/ShowTaskRankSuc.jsp").forward(request, response);
+					response.sendRedirect("../ShowTaskRankSuc.jsp");
+					//request.getRequestDispatcher("/ShowTaskRankSuc.jsp").forward(request, response);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -90,7 +91,8 @@ public class ShowTaskRankServlet extends HttpServlet {
 				//这题没有学生做答
 				String warning="这道题还没有学生做答";
 				request.getSession().setAttribute("warning", warning);
-				request.getRequestDispatcher("../ShowTaskRankFail.jsp").forward(request, response);
+				response.sendRedirect("../ShowTaskRankFail.jsp");
+				//request.getRequestDispatcher("../ShowTaskRankFail.jsp").forward(request, response);
 			}
 			
 

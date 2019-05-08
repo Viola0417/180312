@@ -7,6 +7,9 @@
 <title>上传文件后</title>
 </head>
 <body>
-	<h2>${message}</h2>
+<% 
+	String message = (String)session.getAttribute("message"); 
+	out.print(message);
+%>
 </body>
 </html>

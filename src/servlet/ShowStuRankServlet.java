@@ -83,10 +83,11 @@ public class ShowStuRankServlet extends HttpServlet {
 						for(Log l:log_list) {
 							System.out.println(l.toString());
 						}
-						request.setAttribute("log_list", log_list);
+						request.getSession().setAttribute("log_list", log_list);
 						//String message = "为什么传不过来";
 						//request.getSession().setAttribute("message", message);
-						request.getRequestDispatcher("/ShowStuRankSuc.jsp").forward(request, response);
+						response.sendRedirect("../ShowStuRankSuc.jsp");
+						//request.getRequestDispatcher("/ShowStuRankSuc.jsp").forward(request, response);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -94,7 +95,8 @@ public class ShowStuRankServlet extends HttpServlet {
 				}else{
 					String warning="该学生还未做答";
 					request.getSession().setAttribute("warning", warning);
-					request.getRequestDispatcher("../ShowStuRankFail.jsp").forward(request, response);
+					response.sendRedirect("../ShowStuRankFail.jsp");
+					//request.getRequestDispatcher("../ShowStuRankFail.jsp").forward(request, response);
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

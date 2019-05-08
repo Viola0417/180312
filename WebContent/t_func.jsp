@@ -25,7 +25,7 @@
 	</form>
 	
 	<h1>查看学生做答情况</h1>
-	<form method='get' action="../SelectRank.jsp">
+	<form method='get' action="/111/SelectRank.jsp">
 		<input type='submit' value='查看排名' style='height:30px;width:60px;font-size:20px;'>		
 	</form>
 	

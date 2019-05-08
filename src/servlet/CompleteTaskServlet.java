@@ -60,7 +60,8 @@ public class CompleteTaskServlet extends HttpServlet {
 			System.out.println("要做答的题目不在数据库中");
 			String warning="题目号码不正确";
 			request.getSession().setAttribute("warning", warning);
-			request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
+			response.sendRedirect("../downloadFail.jsp");
+			//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
 		}
 	}
 

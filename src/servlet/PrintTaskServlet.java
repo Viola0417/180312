@@ -62,8 +62,9 @@ public class PrintTaskServlet extends HttpServlet {
 		*/
 		System.out.println("task²éÕÒ½áÊø");
 		//doGet(request, response);
-		request.setAttribute("tasklist", taskList);
-		request.getRequestDispatcher("/TaskIndex.jsp").forward(request, response);
+		request.getSession().setAttribute("tasklist", taskList);
+		response.sendRedirect("../TaskIndex.jsp");
+		//request.getRequestDispatcher("/TaskIndex.jsp").forward(request, response);
 	}
 
 }

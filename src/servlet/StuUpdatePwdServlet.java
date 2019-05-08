@@ -67,11 +67,13 @@ public class StuUpdatePwdServlet extends HttpServlet {
 				s_dao.updateStudent(s);
 				String message="已经成功更新";
 				request.getSession().setAttribute("message", message);
-				request.getRequestDispatcher("../s_UpdatePwdSuc.jsp").forward(request, response);
+				response.sendRedirect("../s_UpdatePwdSuc.jsp");
+				//request.getRequestDispatcher("../s_UpdatePwdSuc.jsp").forward(request, response);
 			}else {
 				String warning="密码输入错误，请重新输入";
 				request.getSession().setAttribute("warning", warning);
-				request.getRequestDispatcher("../s_UpdatePwdFail.jsp").forward(request, response);
+				response.sendRedirect("../s_UpdatePwdFail.jsp");
+				//request.getRequestDispatcher("../s_UpdatePwdFail.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

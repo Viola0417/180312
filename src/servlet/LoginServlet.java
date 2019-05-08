@@ -36,9 +36,6 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		//System.out.println("处理post请求");
-		//Teacher t = new Teacher();
-		//Connection con=null;
 		try {
 			//检测输入密码与数据库中密码是否一致
 			Teacher_Dao t_dao = new Teacher_Dao();
@@ -57,17 +54,20 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("这个用户名不存在");
 				String warning="这个用户不存在";
 				request.getSession().setAttribute("warning", warning);
-				request.getRequestDispatcher("../t_logFail.jsp").forward(request, response);;
+				response.sendRedirect("/111/t_logFail.jsp");
+				//request.getRequestDispatcher("/t_logFail.jsp").forward(request, response);;
 				}else if(db_password.equals(t_password)) {
 					System.out.println("密码一致");
 					request.getSession().setAttribute("logTeacher", t_temp);
 					//跳转页面
-					request.getRequestDispatcher("../t_func.jsp").forward(request, response);
+					response.sendRedirect("/111/t_func.jsp");
+					//request.getRequestDispatcher("/t_func.jsp").forward(request, response);
 					}else {
 						System.out.println("密码错误");
 						String warning="用户名与密码不匹配";
 						request.getSession().setAttribute("warning", warning);
-						request.getRequestDispatcher("../t_logFail.jsp").forward(request, response);
+						response.sendRedirect("/111/t_logFail.jsp");
+						//request.getRequestDispatcher("/t_logFail.jsp").forward(request, response);
 						//request.getRequestDispatcher("../t_index.jsp").forward(request, response);
 					}
 		    

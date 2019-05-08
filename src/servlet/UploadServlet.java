@@ -111,7 +111,7 @@ public class UploadServlet extends HttpServlet {
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
-						request.setAttribute("message", "文件上传成功");
+						request.getSession().setAttribute("message", "文件上传成功");
 						//导入数据库
 						System.out.println("现在要开始导入数据库了");
 						Student_Dao s_dao = new Student_Dao();
@@ -139,10 +139,11 @@ public class UploadServlet extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			request.setAttribute("message", "错误信息："+e.getMessage());
+			request.getSession().setAttribute("message", "错误信息："+e.getMessage());
 		}
 			//跳转到message.jsp
-		request.getServletContext().getRequestDispatcher("/upfilemsg.jsp").forward(request,response);
+		response.sendRedirect("../upfilemsg.jsp");
+		//request.getServletContext().getRequestDispatcher("/upfilemsg.jsp").forward(request,response);
 		}
 	}
 

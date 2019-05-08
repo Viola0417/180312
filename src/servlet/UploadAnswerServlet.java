@@ -287,8 +287,8 @@ public class UploadAnswerServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);
+		response.sendRedirect("../ShowRes.jsp");
+		//request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);
 		//System.out.println("Ö´ÐÐ½áÊø");
 	}
 

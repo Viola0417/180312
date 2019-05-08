@@ -145,7 +145,8 @@ public class DownloadTaskServlet extends HttpServlet {
 			System.out.println("这道题不在数据库中");
 			String warning="题目号码不正确";
 			request.getSession().setAttribute("warning", warning);
-			request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
+			response.sendRedirect("../downloadFail.jsp");
+			//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
 		}
 	}
 
