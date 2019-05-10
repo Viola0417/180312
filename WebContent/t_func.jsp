@@ -18,11 +18,17 @@
 	</form>
 	
 	<form method = "post" action = "/111/servlet/UploadTaskDesServlet" name = "task_form">
-		<h1>题目描述</h1>
+		<h1>新增题目</h1>
 		题目标题：<input type='text' id='title_name' name='title_name' style='height:30px;width:220px;font-size:20px;'><br>
 		题目描述：<input type='text' id='description_name' name='description_name' style='height:30px;width:220px;font-size:20px;'><br>
 		<input type = "submit" value = "提交描述">	
 	</form>
+	
+	<h1>上传测试集</h1>
+	<form method='post' action="/111/servlet/AddTestFileServlet">
+		<input type='submit' value='上传测试集' style='height:30px;width:60px;font-size:20px;'>		
+	</form>
+	
 	
 	<h1>查看学生做答情况</h1>
 	<form method='get' action="/111/SelectRank.jsp">

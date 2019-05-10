@@ -116,14 +116,19 @@ public class UploadFileServlet extends HttpServlet {
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
-						response.sendRedirect("../AddTest.jsp");
+						String message="上传训练集成功";
+						request.getSession().setAttribute("message", message);
+						response.sendRedirect("../AddFileOK.jsp");
+						//response.sendRedirect("../AddTest.jsp");
 					}
 				}
 			}
 			
 			
 		} catch (Exception e) {
-			response.sendRedirect("../AddTrainFail.jsp");
+			String message="上传训练集失败";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../AddFileFail.jsp");
 		}
 			//跳转到message.jsp
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);

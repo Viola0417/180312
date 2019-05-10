@@ -26,6 +26,14 @@
     <url-pattern>/servlet/UploadServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>TestNumServlet</servlet-name>
+    <servlet-class>servlet.TestNumServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestNumServlet</servlet-name>
+    <url-pattern>/servlet/TestNumServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>servlet.LoginServlet</servlet-class>
   </servlet>
@@ -128,5 +136,21 @@
   <servlet-mapping>
     <servlet-name>ShowStuRankServlet</servlet-name>
     <url-pattern>/servlet/ShowStuRankServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddTestFileServlet</servlet-name>
+    <servlet-class>servlet.AddTestFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTestFileServlet</servlet-name>
+    <url-pattern>/servlet/AddTestFileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadTestServlet</servlet-name>
+    <servlet-class>servlet.DownloadTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadTestServlet</servlet-name>
+    <url-pattern>/servlet/DownloadTestServlet</url-pattern>
   </servlet-mapping>
 </web-app>

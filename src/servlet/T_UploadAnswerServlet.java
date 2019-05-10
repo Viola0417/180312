@@ -110,14 +110,18 @@ public class T_UploadAnswerServlet extends HttpServlet {
 						System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
-						response.sendRedirect("../AddTaskOK.jsp");
+						String message="该题目的测试集和答案已经成功上传";
+						request.getSession().setAttribute("message", message);
+						response.sendRedirect("../AddFileOK.jsp");
 					}
 				}
 			}
 			
 			
 		} catch (Exception e) {
-			response.sendRedirect("../AddTestFail.jsp");
+			String message="该题目上传失败";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../AddFileFail.jsp");
 		}
 			//跳转到message.jsp
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);

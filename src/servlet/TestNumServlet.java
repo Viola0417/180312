@@ -1,33 +1,30 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entity.Task;
 import dao.Task_Dao;
+import entity.Task;
 
 /**
- * Servlet implementation class UploadTaskDesServlet
+ * Servlet implementation class TestNumServlet
  */
-@WebServlet("/UploadTaskDesServlet")
-public class UploadTaskDesServlet extends HttpServlet {
+@WebServlet("/TestNumServlet")
+public class TestNumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadTaskDesServlet() {
+    public TestNumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    String title,description;
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,31 +39,35 @@ public class UploadTaskDesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		//System.out.println("OK");
 		request.setCharacterEncoding("utf-8");
-		//System.out.println("处理post请求");
-		title=request.getParameter("title_name");
-		description=request.getParameter("description_name");
-		//System.out.println(title);
-		//System.out.println(description);
-		
+		String task_id = request.getParameter("task_id1");
+		System.out.println(task_id);
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
-		t.setT_description(description);
-		t.setT_title(title);
-		try {
-			t_dao.addTask(t);
-			response.sendRedirect("../AddTask.jsp");
-			//request.getRequestDispatcher("../AddTask.jsp").forward(request, response);;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int TaskNo = 0;
+		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+		//判断输入的题是否在数据库中
+		int enterTask = Integer.parseInt(task_id);
+		if(enterTask<0) {
+			System.out.println("该题格式输入有错");
+			String message="题号输入有误";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../AddTestFail.jsp");
+			
 		}
-		/*
-		request.getSession().setAttribute("title", title);
-		request.getSession().setAttribute("description", description);
-		response.sendRedirect("../AddTask.jsp");
-		*/
-		System.out.println("添加题目结束");
+		if(enterTask<=TaskNo&&enterTask>0) {
+			System.out.println("该题在数据库中");
+			request.getSession().setAttribute("task_id", task_id);
+			response.sendRedirect("../AddTestFile.jsp");
+			
+		}else{
+			System.out.println("该题不在数据库中");
+			String message="该题不在数据库中";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../AddTestFail.jsp");
+			
+		}
 	}
 
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>老师上传测试集失败</title>
+<title>上传文件失败</title>
 </head>
 <body>
 <% 
