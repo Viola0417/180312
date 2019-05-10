@@ -226,4 +226,19 @@ public class Log_Dao {
 		}	
 		return l;
 	}
+	
+	public List<Double> QueryF(int task_id) throws SQLException {
+		Log l = new Log();
+		Connection conn=DbUtil.getConnection();
+		//System.out.println("数据库连接成功");
+		String sql=""+"select F from log where task_id="+"?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setInt(1,task_id);
+		ResultSet rs=ptmt.executeQuery();
+		List<Double> F_list = new ArrayList<Double>();
+		while(rs.next()) {
+			F_list.add(rs.getDouble("F"));
+		}		
+		return F_list;
+	}
 }

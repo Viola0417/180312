@@ -25,5 +25,6 @@
          </c:forEach>
          </tbody>
     </table>
+    <img src="<%=request.getContextPath() %>/2.jpeg" />
 </body>
 </html>

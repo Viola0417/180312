@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import dao.Log_Dao;
 import dao.Task_Dao;
 import entity.Log;
 import entity.Task;
+import service.calculation;
+import service.pie;
 
 /**
  * Servlet implementation class ShowTaskRankServlet
@@ -81,6 +84,17 @@ public class ShowTaskRankServlet extends HttpServlet {
 					request.getSession().setAttribute("log_list", log_list);
 					//String message = "为什么传不过来";
 					//request.getSession().setAttribute("message", message);
+					//生成统计图
+					//先得到本题的F分布
+					calculation c = new calculation();
+					List<Integer> f = new ArrayList<Integer>();
+					f=c.classify_F(enterTask);
+					System.out.println("F已经得到");
+					//开始画图
+					String path = request.getServletContext().getRealPath("./")+File.separator+"1.jpeg";
+					System.out.println("存放图片路径为："+path);
+					pie p = new pie();
+					p.generatePieChart(f, path);
 					response.sendRedirect("../ShowTaskRankSuc.jsp");
 					//request.getRequestDispatcher("/ShowTaskRankSuc.jsp").forward(request, response);
 				} catch (SQLException e) {

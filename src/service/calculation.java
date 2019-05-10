@@ -86,4 +86,42 @@ public class calculation {
 		System.out.println("在所有人中排名为"+rank);
 		return rank;
 	}
+	
+	//根据题号对F的分布进行统计（10%，20%，30%，40%，50%）
+	public List<Integer> classify_F(int task_id) throws SQLException {
+		List<Integer> F_list = new ArrayList<Integer>();
+		List<Double> log_list = new ArrayList<Double>();
+		Log_Dao l_dao = new Log_Dao();
+		//得到这题所有的F
+		log_list = l_dao.QueryF(task_id);
+		//System.out.println(log_list);
+		int a = 0,b=0,c=0,d=0,e=0;//分别代表10%，20%，30%，40%，50%区间
+		//根据F的值做统计
+		for(double f:log_list) {
+			if(f<=0.1) {
+				a++;
+				//break;
+			}else if(f>0.1&&f<=0.2) {
+				b++;
+				//break;
+			}else if(f>0.2&&f<=0.3) {
+				c++;
+				//break;
+			}else if(f>0.3&&f<=0.4) {
+				d++;
+				//break;
+			}else if(f>0.4&&f<=0.5) {
+				e++;
+				//break;
+			}
+		}
+		//System.out.println("a="+a+",b="+b+",c="+c+",d="+d+",e="+e);
+		F_list.add(a);
+		F_list.add(b);
+		F_list.add(c);
+		F_list.add(d);
+		F_list.add(e);
+		System.out.println(F_list);
+		return F_list;
+	}
 }

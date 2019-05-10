@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import dao.Task_Dao;
 import entity.Log;
 import entity.Student;
 import entity.Task;
+import service.multicolumn;
+import service.pie;
 
 /**
  * Servlet implementation class ShowTaskRankServlet
@@ -86,6 +89,11 @@ public class ShowStuRankServlet extends HttpServlet {
 						request.getSession().setAttribute("log_list", log_list);
 						//String message = "为什么传不过来";
 						//request.getSession().setAttribute("message", message);
+						//开始画图
+						String path = request.getServletContext().getRealPath("./")+File.separator+"2.jpeg";
+						System.out.println("存放图片路径为："+path);
+						multicolumn m = new multicolumn();
+						m.generateColumnChart(stu_id, path);
 						response.sendRedirect("../ShowStuRankSuc.jsp");
 						//request.getRequestDispatcher("/ShowStuRankSuc.jsp").forward(request, response);
 					} catch (SQLException e) {
