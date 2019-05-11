@@ -18,6 +18,7 @@ import entity.Log;
 import entity.Task;
 import service.calculation;
 import service.pie;
+import service.pie2;
 
 /**
  * Servlet implementation class ShowTaskRankServlet
@@ -93,7 +94,7 @@ public class ShowTaskRankServlet extends HttpServlet {
 					//开始画图
 					String path = request.getServletContext().getRealPath("./")+File.separator+"1.jpeg";
 					System.out.println("存放图片路径为："+path);
-					pie p = new pie();
+					pie2 p = new pie2();
 					p.generatePieChart(f, path);
 					response.sendRedirect("../ShowTaskRankSuc.jsp");
 					//request.getRequestDispatcher("/ShowTaskRankSuc.jsp").forward(request, response);

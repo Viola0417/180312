@@ -36,6 +36,7 @@ public class multicolumn {
 
     // 画柱状图
     public static void generateColumnChart(int stu_id,String path) throws IOException, SQLException {
+    	System.setProperty("java. awt.headless", "true");
     	DefaultCategoryDataset dataTime = new DefaultCategoryDataset();   
     	Log_Dao l_dao = new Log_Dao();
 		List<Log> log_list = new ArrayList<Log>();
@@ -77,8 +78,8 @@ public class multicolumn {
             DefaultCategoryDataset data = dataTime;   
             // 使用ChartFactory创建3D柱状图，不想使用3D，直接使用createBarChart   
             JFreeChart chart = ChartFactory.createBarChart3D(   
-                    "该学生做题情况统计",    
-                    "题号",    
+                    "F statistics",    
+                    "task_id",    
                     "F",    
                     data,   
                     PlotOrientation.VERTICAL,    

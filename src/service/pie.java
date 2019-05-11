@@ -22,7 +22,8 @@ import org.jfree.data.general.DefaultPieDataset;
 public class pie {
     // 画饼图
     public static void generatePieChart(List<Integer> F_list,String path) throws IOException {
-        DefaultPieDataset dpd = new DefaultPieDataset(); // 建立一个默认的饼图
+    	System.setProperty("java. awt.headless", "true");
+    	DefaultPieDataset dpd = new DefaultPieDataset(); // 建立一个默认的饼图
         int a = F_list.get(0);
         int b = F_list.get(1);
         int c = F_list.get(2);
