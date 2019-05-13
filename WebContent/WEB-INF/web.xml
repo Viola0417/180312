@@ -153,4 +153,12 @@
     <servlet-name>DownloadTestServlet</servlet-name>
     <url-pattern>/servlet/DownloadTestServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteStuServlet</servlet-name>
+    <servlet-class>servlet.DeleteStuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteStuServlet</servlet-name>
+    <url-pattern>/servlet/DeleteStuServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

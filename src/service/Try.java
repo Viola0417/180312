@@ -2,6 +2,7 @@ package service;
 
 import dao.Log_Dao;
 import dao.Student_Dao;
+import entity.F_stu_id;
 import entity.Log;
 import entity.Student;
 import service.ReadExcel;
@@ -17,7 +18,7 @@ public class Try {
 		//Log l = new Log();
 		Log_Dao l_dao = new Log_Dao();
 		
-
+        calculation c = new calculation();
 		//rank = c.Cal_Log_Rank(l);
 		//rank = c.Cal_Stu_Rank(l);
 		/*
@@ -29,6 +30,11 @@ public class Try {
 		*/
 		//multicolumn m = new multicolumn();
 		//m.generateColumnChart();
+		List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
+		fs_list = c.calRankByTask(66);
+		for(F_stu_id f:fs_list) {
+			System.out.println(f.toString());
+		}
 		System.out.println("Ö´ÐÐ½áÊø");
 	}
 }

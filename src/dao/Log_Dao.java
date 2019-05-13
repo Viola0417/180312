@@ -33,7 +33,17 @@ public class Log_Dao {
 			System.out.println("该数据已经存在了");
 		}
 	}
-
+	
+	public void delLog(int stu_id) throws SQLException {
+		Connection conn=DbUtil.getConnection();
+		String sql=""+"delete from log "+" where stu_id=?";
+		//将sql语句加载到驱动程序，但不执行
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		//给sql语句传递参数(从entity动态传参)
+		ptmt.setInt(1,stu_id);
+		//执行sql语句
+		ptmt.execute();
+	}
 	public List<Log> query() throws SQLException {
 		System.out.println("查找数据库里所有的做题记录");
 		Log l = new Log();
@@ -240,5 +250,26 @@ public class Log_Dao {
 			F_list.add(rs.getDouble("F"));
 		}		
 		return F_list;
+	}
+	
+	//得到某个学生本题的最大值F和对应的学号
+	public List<Log> QueryMaxF(int task_id) throws SQLException {
+		List<Log> log_list = new ArrayList<Log>();
+		Log l = new Log();
+		Connection conn=DbUtil.getConnection();
+		//System.out.println("数据库连接成功");
+		String sql="select MAX(F),stu_id from log where task_id="+"?"+" group by stu_id";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setInt(1,task_id);
+		
+		ResultSet rs=ptmt.executeQuery();
+		while(rs.next()) {
+			l = new Log();
+			l.setStu_id(rs.getInt("stu_id"));
+			l.setF(rs.getDouble("MAX(F)"));
+			log_list.add(l);
+		}
+		
+		return log_list;
 	}
 }

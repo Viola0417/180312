@@ -12,7 +12,18 @@
     request.setCharacterEncoding("UTF-8");
 %>
 <body>
-<h1>本题的完成情况</h1>
+<h1>本题的排名情况</h1>
+	<table>
+		<c:forEach items="${fs_list}" var="fs">
+		<tbody>
+				  <td id="no">学生排名：</td><td><c:out value="${fs.no}" />
+                  <td id="stu_id">学生学号：</td><td><c:out value="${fs.stu_id}" />
+                  <td id="F">F：</td><td><c:out value="${fs.f}" />  
+         </c:forEach>
+         </tbody>
+    </table>
+<br>
+<h1>本题的所有完成情况</h1>
 	<table>
 		<c:forEach items="${log_list}" var="log">
 		<tbody>

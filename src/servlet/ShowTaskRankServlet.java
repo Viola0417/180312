@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Log_Dao;
 import dao.Task_Dao;
+import entity.F_stu_id;
 import entity.Log;
 import entity.Task;
 import service.calculation;
@@ -85,9 +86,17 @@ public class ShowTaskRankServlet extends HttpServlet {
 					request.getSession().setAttribute("log_list", log_list);
 					//String message = "为什么传不过来";
 					//request.getSession().setAttribute("message", message);
+					//计算学生排名
+					calculation c = new calculation();
+					List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
+					fs_list = c.calRankByTask(enterTask);
+					for(F_stu_id f:fs_list) {
+						System.out.println(f.toString());
+					}
+					request.getSession().setAttribute("fs_list", fs_list);
 					//生成统计图
 					//先得到本题的F分布
-					calculation c = new calculation();
+					
 					List<Integer> f = new ArrayList<Integer>();
 					f=c.classify_F(enterTask);
 					System.out.println("F已经得到");

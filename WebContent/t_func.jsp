@@ -6,6 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>批量导入学生</title>
 </head>
+<script type='text/javascript'>
+	function check(){
+		//alert("你好呀");
+		var s_id = document.getElementById('s_id').value;
+		if(s_id == ''||s_id == null){
+			alert("输入学号不能为空");
+			return false;
+		}
+	}
+</script>
 <body>
 <jsp:useBean id="logTeacher" class="entity.Teacher" scope="session"/>
 当前用户：<jsp:getProperty name="logTeacher" property="t_name"/><br/>
@@ -35,5 +45,12 @@
 		<input type='submit' value='查看排名' style='height:30px;width:60px;font-size:20px;'>		
 	</form>
 	
+	
+	<h1>删除学生</h1>
+	<form method='post' action="/111/servlet/DeleteStuServlet" onSubmit='return check()'>
+	          要删除的学生的学号是：<input type='text' id='s_id' name='s_id' style='height:30px;width:220px;font-size:20px;'><br>
+		<input type='submit' value='删除该学生' style='height:30px;width:60px;font-size:20px;'>
+	</form>
+		
 </body>
 </html>

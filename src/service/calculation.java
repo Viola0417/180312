@@ -2,10 +2,13 @@ package service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
 import dao.Log_Dao;
+import entity.F_stu_id;
 import entity.Log;
 
 public class calculation {
@@ -123,5 +126,70 @@ public class calculation {
 		F_list.add(e);
 		System.out.println(F_list);
 		return F_list;
+	}
+	
+	//根据题目编号得到大家的排名
+	public List<F_stu_id> calRankByTask(int task_id) throws SQLException{
+		//System.out.println("过来了");
+		Log_Dao l_dao = new Log_Dao();
+		//List<Log> rank_log_list = new ArrayList<Log>();
+		//所有做过这道题的人的学号+他们最高的F
+		List<Log> log_list = new ArrayList<Log>();
+		log_list = l_dao.QueryMaxF(task_id);
+		/*
+		for(Log l:log_list) {
+			System.out.println(l.toString());
+		}
+		*/
+		double max_f = 0;
+		int max_f_stu = 0;
+		//冒泡排序,把F最大的放在后面
+		for(int i=0;i<(log_list.size()-1);i++) {
+			for(int j=0;j<log_list.size()-1-i;j++) {
+				if(log_list.get(j).getF()>log_list.get(j+1).getF()) {
+					max_f = log_list.get(j).getF();
+					max_f_stu = log_list.get(j).getStu_id();
+					log_list.get(j).setF(log_list.get(j+1).getF());
+					log_list.get(j).setStu_id(log_list.get(j+1).getStu_id());
+					log_list.get(j+1).setF(max_f);
+					log_list.get(j+1).setStu_id(max_f_stu);
+				}
+			}
+			//System.out.println(log_list);
+		}
+	    //逆序
+		F_stu_id fs = new F_stu_id();
+		List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
+		int no = 1;//记录排名
+		int no_same = 0;//记录一样的F
+		for(int i=log_list.size()-1;i>0;i--) {
+		    fs = new F_stu_id();
+			fs.setF(log_list.get(i).getF());
+			fs.setStu_id(log_list.get(i).getStu_id());
+			if(i==log_list.size()-1) {
+				fs.setNo(1);
+				fs_list.add(fs);
+				//break;
+			}else if(log_list.get(i).getF()!=log_list.get(i+1).getF()) {
+				no = no+no_same+1;
+				no_same = 0;
+				fs.setNo(no);
+				fs_list.add(fs);
+				//break;
+			}else {
+					no_same = no_same + 1;
+					fs.setNo(no);
+					fs_list.add(fs);
+			}
+			//有F值相同的情况
+
+		}
+		/*
+		for(F_stu_id f:fs_list) {
+			System.out.println(f.toString());
+		}
+		*/
+		//System.out.println(log_list);
+		return fs_list;
 	}
 }

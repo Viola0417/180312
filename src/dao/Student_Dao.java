@@ -40,6 +40,7 @@ public class Student_Dao {
 		//÷¥––sql”Ôæ‰
 		ptmt.execute();
 	}
+	
 	public void delStudent(int id) throws SQLException {
 		Connection conn=DbUtil.getConnection();
 		String sql=""+"delete from student "+" where id=?";
