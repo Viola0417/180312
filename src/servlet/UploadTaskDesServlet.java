@@ -27,7 +27,7 @@ public class UploadTaskDesServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    String title,description;
+    String title,description,kind;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,6 +46,8 @@ public class UploadTaskDesServlet extends HttpServlet {
 		//System.out.println("¥¶¿Ìpost«Î«Û");
 		title=request.getParameter("title_name");
 		description=request.getParameter("description_name");
+		kind=request.getParameter("checkbox");
+		//System.out.println("kind:"+kind);
 		//System.out.println(title);
 		//System.out.println(description);
 		
@@ -53,6 +55,7 @@ public class UploadTaskDesServlet extends HttpServlet {
 		Task_Dao t_dao = new Task_Dao();
 		t.setT_description(description);
 		t.setT_title(title);
+		t.setT_kind(kind);
 		try {
 			t_dao.addTask(t);
 			response.sendRedirect("../AddTask.jsp");

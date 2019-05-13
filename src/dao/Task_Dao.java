@@ -12,12 +12,13 @@ public class Task_Dao {
 	public void addTask(Task t) throws SQLException {
 		try {
 			Connection conn=DbUtil.getConnection();
-			String sql=""+"insert into task"+"(title,description)"+"values("+"?,?)";
+			String sql=""+"insert into task"+"(title,description,kind)"+"values("+"?,?,?)";
 		//将sql语句加载到驱动程序，但不执行
 			PreparedStatement ptmt=conn.prepareStatement(sql);
 		//给sql语句传递参数(从entity动态传参)
 			ptmt.setString(1, t.getT_title());
 			ptmt.setString(2, t.getT_description());
+			ptmt.setString(3, t.getT_kind());
 		//执行sql语句
 			ptmt.execute();
 		}catch(Exception e) {
@@ -59,6 +60,7 @@ public class Task_Dao {
 			t.setT_id(rs.getInt("id"));
 			t.setT_title(rs.getString("title"));
 			t.setT_description(rs.getString("description"));
+			t.setT_kind(rs.getString("kind"));
 			task.add(t);
 		}		
 		return task;

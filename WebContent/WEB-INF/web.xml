@@ -161,4 +161,12 @@
     <servlet-name>DeleteStuServlet</servlet-name>
     <url-pattern>/servlet/DeleteStuServlet</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>S</servlet-name>
+    <servlet-class>servlet.S</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>S</servlet-name>
+    <url-pattern>/servlet/S</url-pattern>
+  </servlet-mapping>
 </web-app>
