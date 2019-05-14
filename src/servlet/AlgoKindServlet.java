@@ -51,7 +51,7 @@ public class AlgoKindServlet extends HttpServlet {
 		String message3=null;
 		request.setCharacterEncoding("utf-8");
 		String path = request.getServletContext().getRealPath("./")+File.separator+"3.jpeg";
-		System.out.println("存放图片路径为："+path);
+		//System.out.println("存放图片路径为："+path);
 		pie3 p = new pie3();
 		String task_kind="分类";
 		List<Integer> task_id_list = new ArrayList<Integer>();

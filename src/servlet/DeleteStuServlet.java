@@ -45,7 +45,7 @@ public class DeleteStuServlet extends HttpServlet {
 		String s_id = null;
 		request.setCharacterEncoding("utf-8");
 		s_id=request.getParameter("s_id");
-		System.out.println("要被删除掉的学生的学号是："+s_id);
+		//System.out.println("要被删除掉的学生的学号是："+s_id);
 		//判断这个学号是否存在
 		Student s = new Student();
 		Student_Dao s_dao = new Student_Dao();

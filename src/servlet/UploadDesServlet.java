@@ -42,7 +42,7 @@ public class UploadDesServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String algo=request.getParameter("algo");
 		String description=request.getParameter("description");
-		System.out.println(algo+"    "+description);
+		//System.out.println(algo+"    "+description);
 		request.getSession().setAttribute("algo",algo);
 		request.getSession().setAttribute("description",description);
 		response.sendRedirect("../CompleteTask.jsp");

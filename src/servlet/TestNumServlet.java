@@ -42,7 +42,7 @@ public class TestNumServlet extends HttpServlet {
 		//System.out.println("OK");
 		request.setCharacterEncoding("utf-8");
 		String task_id = request.getParameter("task_id1");
-		System.out.println(task_id);
+		//System.out.println(task_id);
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
 		int TaskNo = 0;
@@ -53,7 +53,7 @@ public class TestNumServlet extends HttpServlet {
 			System.out.println("该题格式输入有错");
 			String message="题号输入有误";
 			request.getSession().setAttribute("message", message);
-			response.sendRedirect("../AddTestFail.jsp");
+			response.sendRedirect("../Res.jsp");
 			
 		}
 		if(enterTask<=TaskNo&&enterTask>0) {
@@ -65,7 +65,7 @@ public class TestNumServlet extends HttpServlet {
 			System.out.println("该题不在数据库中");
 			String message="该题不在数据库中";
 			request.getSession().setAttribute("message", message);
-			response.sendRedirect("../AddTestFail.jsp");
+			response.sendRedirect("../Res.jsp");
 			
 		}
 	}

@@ -58,7 +58,7 @@ public class AddTestFileServlet extends HttpServlet {
 		request.getSession().setAttribute("tasklist", taskList);
 		
 		response.sendRedirect("../AddTest.jsp");
-		System.out.println("ok");
+		//System.out.println("ok");
 	}
 
 }

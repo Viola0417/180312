@@ -42,7 +42,7 @@ public class StuLoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		System.out.println("处理post请求");
+		//System.out.println("处理post请求");
 		//Teacher t = new Teacher();
 		//Connection con=null;
 		try {
@@ -59,26 +59,27 @@ public class StuLoginServlet extends HttpServlet {
 			//System.out.println(s_temp.toString());
 			String db_password=s_temp.getS_password();
 			//System.out.println(db_password);
-			System.out.println("这个人的学号是："+s_temp.getS_id());
+			//System.out.println("这个人的学号是："+s_temp.getS_id());
 			//把学生学号存进叫stu_id的session，方便以后servlet使用
 			request.getSession().setAttribute("stu_id",s_temp.getS_id());
 			if(db_password==null) {
 				System.out.println("这个用户名不存在");
-				String warning="这个用户不存在";
-				request.getSession().setAttribute("warning", warning);
-				response.sendRedirect("../s_logFail.jsp");
+				String message="这个用户不存在";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);
 				}else if(db_password.equals(s_password)) {
-					System.out.println("密码一致");
+					//System.out.println("密码一致");
 					request.getSession().setAttribute("logStudent", s_temp);
 					//跳转页面
 					response.sendRedirect("../s_func.jsp");
 					//request.getRequestDispatcher("../s_func.jsp").forward(request, response);
 					}else {
-						System.out.println("密码错误");
-						String warning="用户名与密码不匹配";
-						request.getSession().setAttribute("warning", warning);
-						response.sendRedirect("../s_logFail.jsp");
+						//System.out.println("密码错误");
+						String message="用户名与密码不匹配";
+						request.getSession().setAttribute("message", message);
+						response.sendRedirect("../Res.jsp");
+						//response.sendRedirect("../s_logFail.jsp");
 						//request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);
 						//request.getRequestDispatcher("../t_index.jsp").forward(request, response);
 					}

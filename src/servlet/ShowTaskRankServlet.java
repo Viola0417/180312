@@ -50,7 +50,7 @@ public class ShowTaskRankServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("即将展示题目排名");
+		//System.out.println("即将展示题目排名");
 		//先判断该题是否存在
 		//1.题目本身不存在
 		//2.题目还没有人做答
@@ -80,9 +80,11 @@ public class ShowTaskRankServlet extends HttpServlet {
 				List<Log> log_list = new ArrayList<Log>();
 				try {
 					log_list = l_dao.QueryByTaskNo(enterTask);
-					for(Log l:log_list) {
+					/*
+					 for(Log l:log_list) {
 						System.out.println(l.toString());
 					}
+					*/
 					request.getSession().setAttribute("log_list", log_list);
 					//String message = "为什么传不过来";
 					//request.getSession().setAttribute("message", message);
@@ -99,10 +101,10 @@ public class ShowTaskRankServlet extends HttpServlet {
 					
 					List<Integer> f = new ArrayList<Integer>();
 					f=c.classify_F(enterTask);
-					System.out.println("F已经得到");
+					//System.out.println("F已经得到");
 					//开始画图
 					String path = request.getServletContext().getRealPath("./")+File.separator+"1.jpeg";
-					System.out.println("存放图片路径为："+path);
+					//System.out.println("存放图片路径为："+path);
 					pie2 p = new pie2();
 					p.generatePieChart(f, path);
 					response.sendRedirect("../ShowTaskRankSuc.jsp");
@@ -113,18 +115,20 @@ public class ShowTaskRankServlet extends HttpServlet {
 				}
 			}else {
 				//这题没有学生做答
-				String warning="这道题还没有学生做答";
-				request.getSession().setAttribute("warning", warning);
-				response.sendRedirect("../ShowTaskRankFail.jsp");
+				String message="这道题还没有学生做答";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
+				//response.sendRedirect("../ShowTaskRankFail.jsp");
 				//request.getRequestDispatcher("../ShowTaskRankFail.jsp").forward(request, response);
 			}
 			
 
 		}else {
 			//这题不在数据库中
-			String warning="这道题还未被添加";
-			request.getSession().setAttribute("warning", warning);
-			request.getRequestDispatcher("../ShowTaskRankFail.jsp").forward(request, response);
+			String message="这道题还未被添加";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+			//request.getRequestDispatcher("../ShowTaskRankFail.jsp").forward(request, response);
 		}
 	}
 

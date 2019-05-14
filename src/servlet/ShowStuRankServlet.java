@@ -50,7 +50,7 @@ public class ShowStuRankServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("即将展示学生做答情况");
+		//System.out.println("即将展示学生做答情况");
 		//先判断该学生是否存在
 		//1.学生本身不存在
 		//2.学生还没有做答
@@ -91,7 +91,7 @@ public class ShowStuRankServlet extends HttpServlet {
 						//request.getSession().setAttribute("message", message);
 						//开始画图
 						String path = request.getServletContext().getRealPath("./")+File.separator+"2.jpeg";
-						System.out.println("存放图片路径为："+path);
+						//System.out.println("存放图片路径为："+path);
 						multicolumn m = new multicolumn();
 						m.generateColumnChart(stu_id, path);
 						response.sendRedirect("../ShowStuRankSuc.jsp");
@@ -101,9 +101,10 @@ public class ShowStuRankServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}else{
-					String warning="该学生还未做答";
-					request.getSession().setAttribute("warning", warning);
-					response.sendRedirect("../ShowStuRankFail.jsp");
+					String message="该学生还未做答";
+					request.getSession().setAttribute("message", message);
+					response.sendRedirect("../Res.jsp");
+					//response.sendRedirect("../ShowStuRankFail.jsp");
 					//request.getRequestDispatcher("../ShowStuRankFail.jsp").forward(request, response);
 				}
 			} catch (SQLException e1) {
@@ -113,9 +114,10 @@ public class ShowStuRankServlet extends HttpServlet {
 			
 			
 		}else {
-			String warning="该学生不在本系统";
-			request.getSession().setAttribute("warning", warning);
-			request.getRequestDispatcher("../ShowStuRankFail.jsp").forward(request, response);
+			String message="该学生不在本系统";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+			//request.getRequestDispatcher("../ShowStuRankFail.jsp").forward(request, response);
 		}
 	}
 

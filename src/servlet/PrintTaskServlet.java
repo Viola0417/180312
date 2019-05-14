@@ -44,8 +44,8 @@ public class PrintTaskServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession  hs = request.getSession();
 		int stu_id = (int) hs.getAttribute("stu_id");
-		System.out.println("学生学号是："+stu_id);
-		System.out.println("现在要开始查找task");
+		//System.out.println("学生学号是："+stu_id);
+		//System.out.println("现在要开始查找task");
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
 		List<Task> taskList = new ArrayList<Task>();
@@ -60,7 +60,7 @@ public class PrintTaskServlet extends HttpServlet {
 			System.out.println(t2.toString());
 		}
 		*/
-		System.out.println("task查找结束");
+		//System.out.println("task查找结束");
 		//doGet(request, response);
 		request.getSession().setAttribute("tasklist", taskList);
 		response.sendRedirect("../TaskIndex.jsp");

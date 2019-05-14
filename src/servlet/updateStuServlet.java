@@ -44,10 +44,10 @@ public class updateStuServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("过来了");
+		//System.out.println("过来了");
 		String f_path;
 		f_path = request.getParameter("f_name");
-		System.out.println(f_path);
+		//System.out.println(f_path);
 		Student_Dao s_dao = new Student_Dao();
 		//ParseExcel parser = new ParseExcel();
 		InputStream inputStream = new FileInputStream(f_path);
@@ -60,10 +60,10 @@ public class updateStuServlet extends HttpServlet {
 		//Student student = null;
 		List<Student> list = xlsMain.readXls(inputStream,suffix,startRow);
 		
-		System.out.println("执行结束");
+		//System.out.println("执行结束");
 		
 		for(Student s : list){
-			System.out.println(s.toString());
+			//System.out.println(s.toString());
 			try {
 				s_dao.addStudent(s);
 			} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class updateStuServlet extends HttpServlet {
 			}
 			
 		}
-		System.out.println("执行结束");
+		//System.out.println("执行结束");
 		//doGet(request, response);
 	}
 

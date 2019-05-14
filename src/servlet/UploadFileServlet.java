@@ -59,20 +59,20 @@ public class UploadFileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-		System.out.println("开始上传训练集");
+		//doGet(request, response);
+		//System.out.println("开始上传训练集");
 		Task t = new Task();
 		Task_Dao t_dao = new Task_Dao();
 		int TaskNo = 0;
 		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
 		String TaskStr = String.valueOf(TaskNo);
-		System.out.println(TaskNo);
+		//System.out.println(TaskNo);
 		//System.out.println("开始新建文件夹");
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			//如果不是则停止
 			PrintWriter writer = response.getWriter();
 			writer.println("错误！");
-			System.out.println("不包含enctype=multipart/form-data");
+			//System.out.println("不包含enctype=multipart/form-data");
 			writer.flush();
 			return;
 		}
@@ -92,7 +92,7 @@ public class UploadFileServlet extends HttpServlet {
 		upload.setHeaderEncoding("UTF-8");
 		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+TaskStr;
 		
-		System.out.println(uploadPath);
+		//System.out.println(uploadPath);
 		//如果目录不存在就创建
 		File uploadDir = new File(uploadPath);
 		if(!uploadDir.exists()) {
@@ -110,15 +110,15 @@ public class UploadFileServlet extends HttpServlet {
 					if(!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator + LIST_NAME;
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						File storeFile = new File(filePath);
 						//在控制台输出文件的上传路径
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
 						String message="上传训练集成功";
 						request.getSession().setAttribute("message", message);
-						response.sendRedirect("../AddFileOK.jsp");
+						response.sendRedirect("../Res.jsp");
 						//response.sendRedirect("../AddTest.jsp");
 					}
 				}
@@ -128,7 +128,7 @@ public class UploadFileServlet extends HttpServlet {
 		} catch (Exception e) {
 			String message="上传训练集失败";
 			request.getSession().setAttribute("message", message);
-			response.sendRedirect("../AddFileFail.jsp");
+			response.sendRedirect("../Res.jsp");
 		}
 			//跳转到message.jsp
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);

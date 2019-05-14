@@ -39,7 +39,7 @@ public class CompleteTaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("学生准备做答题目");
+		//System.out.println("学生准备做答题目");
 		String task_id = null;
 		request.setCharacterEncoding("utf-8");
 		task_id=request.getParameter("task_id2");
@@ -51,16 +51,16 @@ public class CompleteTaskServlet extends HttpServlet {
 		//判断输入的题是否在数据库中
 		int enterTask = Integer.parseInt(task_id);
 		if(enterTask<=TaskNo&&enterTask>0) {
-			System.out.println("要做答的题目在数据库中");
+			//System.out.println("要做答的题目在数据库中");
 			//把该题目存入session
 			request.getSession().setAttribute("task_id",enterTask);
 			response.sendRedirect("../s_addalgo.jsp");
 			
 		}else {
-			System.out.println("要做答的题目不在数据库中");
-			String warning="题目号码不正确";
-			request.getSession().setAttribute("warning", warning);
-			response.sendRedirect("../downloadFail.jsp");
+			//System.out.println("要做答的题目不在数据库中");
+			String message="题目号码不正确";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
 			//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
 		}
 	}

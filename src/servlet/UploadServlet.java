@@ -61,13 +61,13 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("____________________________________________");
+		//System.out.println("____________________________________________");
 		//检测是否为多媒体上传
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			//如果不是则停止
 			PrintWriter writer = response.getWriter();
 			writer.println("错误！");
-			System.out.println("不包含enctype=multipart/form-data");
+			//System.out.println("不包含enctype=multipart/form-data");
 			writer.flush();
 			return;
 		}
@@ -105,15 +105,15 @@ public class UploadServlet extends HttpServlet {
 					if(!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
 						String filePath = uploadPath + File.separator + LIST_NAME;
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						File storeFile = new File(filePath);
 						//在控制台输出文件的上传路径
-						System.out.println(filePath);
+						//System.out.println(filePath);
 						//保存文件到硬盘
 						item.write(storeFile);
 						request.getSession().setAttribute("message", "文件上传成功");
 						//导入数据库
-						System.out.println("现在要开始导入数据库了");
+						//System.out.println("现在要开始导入数据库了");
 						Student_Dao s_dao = new Student_Dao();
 						InputStream inputStream = new FileInputStream(filePath);
 						String suffix = "xlsx";
@@ -122,10 +122,10 @@ public class UploadServlet extends HttpServlet {
 						ReadExcel xlsMain = new ReadExcel();
 						List<Student> list = xlsMain.readXls(inputStream, suffix, startRow);
 						
-						System.out.println("执行结束");
+						//System.out.println("执行结束");
 						
 						for(Student s:list) {
-							System.out.println(s.toString());
+							//System.out.println(s.toString());
 							try {
 								s_dao.addStudent(s);
 							}catch(SQLException e) {
@@ -142,7 +142,7 @@ public class UploadServlet extends HttpServlet {
 			request.getSession().setAttribute("message", "错误信息："+e.getMessage());
 		}
 			//跳转到message.jsp
-		response.sendRedirect("../upfilemsg.jsp");
+		response.sendRedirect("../Res.jsp");
 		//request.getServletContext().getRequestDispatcher("/upfilemsg.jsp").forward(request,response);
 		}
 	}

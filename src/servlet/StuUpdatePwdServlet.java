@@ -42,7 +42,7 @@ public class StuUpdatePwdServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("学生修改密码");
+		//System.out.println("学生修改密码");
 		Student s = new Student();
 		Student_Dao s_dao = new Student_Dao();
 		//doGet(request, response);
@@ -50,7 +50,7 @@ public class StuUpdatePwdServlet extends HttpServlet {
 		//System.out.println("处理post请求");
 		String origin_password = request.getParameter("origin_password");
 		String new_password = request.getParameter("new_password");
-		System.out.println("原来密码是："+origin_password+"新密码是："+new_password);
+		//System.out.println("原来密码是："+origin_password+"新密码是："+new_password);
 		//先根据学号检查原来的密码输入是否正确
 		//获取学生学号
 		HttpSession  hs = request.getSession();
@@ -67,12 +67,12 @@ public class StuUpdatePwdServlet extends HttpServlet {
 				s_dao.updateStudent(s);
 				String message="已经成功更新";
 				request.getSession().setAttribute("message", message);
-				response.sendRedirect("../s_UpdatePwdSuc.jsp");
+				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("../s_UpdatePwdSuc.jsp").forward(request, response);
 			}else {
-				String warning="密码输入错误，请重新输入";
-				request.getSession().setAttribute("warning", warning);
-				response.sendRedirect("../s_UpdatePwdFail.jsp");
+				String message="密码输入错误，请返回重新输入";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("../s_UpdatePwdFail.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {

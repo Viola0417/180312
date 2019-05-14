@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -60,13 +61,9 @@ public class UploadTestServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		System.out.println("开始上传训练集");
-		Task t = new Task();
-		Task_Dao t_dao = new Task_Dao();
-		int TaskNo = 0;
-		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
-		String TaskStr = String.valueOf(TaskNo);
-		System.out.println(TaskNo);
+		HttpSession  hs = request.getSession();
+		String task_id = (String) hs.getAttribute("task_id");
+		System.out.println("task_id是：！！！！！！"+task_id);
 		//System.out.println("开始新建文件夹");
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			//如果不是则停止
@@ -90,7 +87,7 @@ public class UploadTestServlet extends HttpServlet {
 		upload.setSizeMax(MAX_REQUEST_SIZE);
 		//中文处理
 		upload.setHeaderEncoding("UTF-8");
-		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+TaskStr;
+		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+task_id;
 		
 		System.out.println(uploadPath);
 		//如果目录不存在就创建
@@ -123,7 +120,9 @@ public class UploadTestServlet extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			response.sendRedirect("../AddTestFail.jsp");
+			String message="该题目上传失败";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
 		}
 			//跳转到message.jsp
 		//request.getRequestDispatcher("/uptaskmsg.jsp").forward(request, response);

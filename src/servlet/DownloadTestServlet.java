@@ -50,7 +50,7 @@ public class DownloadTestServlet extends HttpServlet {
 		//doGet(request, response);
 		String task_id = null;
 		//String filename = null;
-		System.out.println("准备下载test了");
+		//System.out.println("准备下载test了");
 		request.setCharacterEncoding("utf-8");
 		//System.out.println("处理post请求");
 		task_id=request.getParameter("task_id3");
@@ -58,7 +58,7 @@ public class DownloadTestServlet extends HttpServlet {
 		String test_file_path = context.getRealPath(task_id+"/test");
 		File file = new File(test_file_path);
 		if(file.exists()) {
-			System.out.println("文件存在");
+			//System.out.println("文件存在");
 			String[] names={"test.xlsx"};
 	        FileInputStream input_test = new FileInputStream(new File(test_file_path));
 	       // FileInputStream input_test = new FileInputStream(new File(test_file_path));
@@ -83,7 +83,7 @@ public class DownloadTestServlet extends HttpServlet {
 	        zout.close();
 	        
 	        
-	        System.out.println("下载zip");
+	        //System.out.println("下载zip");
 	        FileInputStream zipInput =new FileInputStream(zipFile);
 	        OutputStream out = response.getOutputStream();
 	        response.setContentType("application/octet-stream");
@@ -99,9 +99,9 @@ public class DownloadTestServlet extends HttpServlet {
 	        zipFile.delete();
 		}else {
 			System.out.println("文件不存在");
-			String warning="文件不存在";
-			request.getSession().setAttribute("warning", warning);
-			response.sendRedirect("../downloadFail.jsp");
+			String message="文件不存在";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
 		}
 	}
 
