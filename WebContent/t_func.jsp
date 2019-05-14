@@ -33,12 +33,9 @@
 		题目描述：<input type='text' id='description_name' name='description_name' style='height:30px;width:220px;font-size:20px;'><br>
 		<p>
 		题目类别：
-     	<input type="checkbox" name="checkbox" value="SVM" />SVM
-     	<input type="checkbox" name="checkbox" value="决策树" /> 决策树
-     	<input type="checkbox" name="checkbox" value="KNN最近邻" />KNN最近邻
-     	<input type="checkbox" name="checkbox" value="随机森林" />随机森林
-     	<input type="checkbox" name="checkbox" value="朴素贝叶斯" />朴素贝叶斯
-     	<input type="checkbox" name="checkbox" value="逻辑回归" />逻辑回归
+     	<input type="checkbox" name="checkbox" value="分类" />分类
+     	<input type="checkbox" name="checkbox" value="回归" /> 回归
+     	<input type="checkbox" name="checkbox" value="聚类" /> 聚类
      	<input type="checkbox" name="checkbox" value="其他" />其他
    		</p>
 		<input type = "submit" value = "提交描述">	

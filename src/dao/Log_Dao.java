@@ -272,4 +272,22 @@ public class Log_Dao {
 		
 		return log_list;
 	}
+	
+	//根据task_id找到它对应的Algo
+	public List<String> QueryAlgobyTask(int task_id) throws SQLException {
+		List<String> algo_list = new ArrayList<String>();
+		Connection conn=DbUtil.getConnection();
+		//System.out.println("数据库连接成功");
+		String sql="select algo from log where task_id="+"?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setInt(1,task_id);
+		String algo = null;
+		ResultSet rs=ptmt.executeQuery();
+		while(rs.next()) {
+			algo = rs.getString("algo");
+			algo_list.add(algo);
+		}
+		
+		return algo_list;
+	}
 }

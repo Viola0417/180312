@@ -65,6 +65,22 @@ public class Task_Dao {
 		}		
 		return task;
 	}
+	
+	//根据题目类型找到题目的id
+	public List<Integer> queryIDbyKind(String task_kind) throws SQLException {
+		List<Integer> task_id_list = new ArrayList<Integer>();
+		int task_id = 0;
+		Connection conn=DbUtil.getConnection();
+		String sql="select id from task where kind = "+"?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setString(1,task_kind);
+		ResultSet rs=ptmt.executeQuery();
+		while(rs.next()) {
+			task_id = rs.getInt("id");
+			task_id_list.add(task_id);
+		}		
+		return task_id_list;
+	}
 
 }
 

@@ -16,5 +16,10 @@
 	<form method='get' action="/111/SelectRankbyStu.jsp">
 		<input type='submit' value='查看排名' style='height:30px;width:60px;font-size:20px;'>		
 	</form>
+		<br/><br/>
+	查看题目类别与关键算法之间的关系
+	<form method='post' action="/111/servlet/AlgoKindServlet">
+		<input type='submit' value='查看关系' style='height:30px;width:60px;font-size:20px;'>		
+	</form>
 </body>
 </html>
