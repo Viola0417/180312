@@ -15,6 +15,14 @@
 			return false;
 		}
 	}
+	function check1(){
+		//alert("你好呀");
+		var t_id = document.getElementById('t_id').value;
+		if(t_id == ''||t_id == null){
+			alert("输入题号不能为空");
+			return false;
+		}
+	}
 </script>
 <body>
 <jsp:useBean id="logTeacher" class="entity.Teacher" scope="session"/>
@@ -33,7 +41,6 @@
 		题目描述：<input type='text' id='description_name' name='description_name' style='height:30px;width:220px;font-size:20px;'><br>
 		<p>
 		题目类别：
-     	<input type="checkbox" name="checkbox" value="分类" />分类
      	<input type="checkbox" name="checkbox" value="回归" /> 回归
      	<input type="checkbox" name="checkbox" value="聚类" /> 聚类
      	<input type="checkbox" name="checkbox" value="其他" />其他
@@ -58,6 +65,11 @@
 	          要删除的学生的学号是：<input type='text' id='s_id' name='s_id' style='height:30px;width:220px;font-size:20px;'><br>
 		<input type='submit' value='删除该学生' style='height:30px;width:60px;font-size:20px;'>
 	</form>
-		
+	
+	<h1>删除题目</h1>
+	<form method='post' action="/111/servlet/DeleteTaskServlet" onSubmit='return check1()'>
+	          要删除的题目的题号是：<input type='text' id='t_id' name='t_id' style='height:30px;width:220px;font-size:20px;'><br>
+		<input type='submit' value='删除该题目' style='height:30px;width:60px;font-size:20px;'>
+	</form>
 </body>
 </html>

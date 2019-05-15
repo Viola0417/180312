@@ -44,6 +44,18 @@ public class Log_Dao {
 		//执行sql语句
 		ptmt.execute();
 	}
+	
+	public void delLogbyTask(int task_id) throws SQLException {
+		Connection conn=DbUtil.getConnection();
+		String sql=""+"delete from log "+" where task_id=?";
+		//将sql语句加载到驱动程序，但不执行
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		//给sql语句传递参数(从entity动态传参)
+		ptmt.setInt(1,task_id);
+		//执行sql语句
+		ptmt.execute();
+	}
+	
 	public List<Log> query() throws SQLException {
 		System.out.println("查找数据库里所有的做题记录");
 		Log l = new Log();

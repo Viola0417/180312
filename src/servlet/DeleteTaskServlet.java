@@ -1,10 +1,7 @@
 package servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,21 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Log_Dao;
+import dao.Student_Dao;
 import dao.Task_Dao;
-import service.multicolumn;
-import service.pie3;
+import entity.Student;
 
 /**
- * Servlet implementation class AlgoKindServlet
+ * Servlet implementation class DeleteTaskServlet
  */
-@WebServlet("/AlgoKindServlet")
-public class AlgoKindServlet extends HttpServlet {
+@WebServlet(name = "DeleteTask", urlPatterns = { "/DeleteTask" })
+public class DeleteTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlgoKindServlet() {
+    public DeleteTaskServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,34 +43,36 @@ public class AlgoKindServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		//查找数据库根据分类、回归、聚类得到图片
-
+		String t_id = null;
 		request.setCharacterEncoding("utf-8");
-		String path = request.getServletContext().getRealPath("./")+File.separator+"3.jpeg";
-		//System.out.println("存放图片路径为："+path);
-		pie3 p = new pie3();
-
-		
-		path = request.getServletContext().getRealPath("./")+File.separator+"4.jpeg";
-		String task_kind = "回归";
+		t_id=request.getParameter("t_id");
+		Task_Dao t_dao = new Task_Dao();
+		Log_Dao l_dao = new Log_Dao();
+		int res = 0;
+		int task_id = Integer.parseInt(t_id);
 		try {
-				p.generatePieChart(task_kind, path);
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();			
-		}
-		
-		path = request.getServletContext().getRealPath("./")+File.separator+"5.jpeg";
-		task_kind = "聚类";
-		try {
-				p.generatePieChart(task_kind, path);
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				e.printStackTrace();
+			//res=1题目存在；res=0题目不存在
+			res = t_dao.CheckLogByTask(task_id);
+			if(res==0) {
+				//题目不存在的时候
+				String message="该题目未被添加过";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
+				//request.getRequestDispatcher("../Res.jsp").forward(request, response);
+			}else if(res==1) {
+				//题目存在的时候
+				t_dao.delTask(task_id);
+				l_dao.delLogbyTask(task_id);
+				String message="该题目以及关于其的做题记录已经成功删除";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
+				//request.getRequestDispatcher("../Res.jsp").forward(request, response);
 			}
-		
-		
-		response.sendRedirect("../ShowAlgoKind.jsp");
-	}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}	
 
 }

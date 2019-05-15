@@ -10,8 +10,6 @@
     request.setCharacterEncoding("UTF-8");
 %>
 <body>
-	<h1>分类</h1>
-    <img src="<%=request.getContextPath() %>/3.jpeg" />
     <h1>回归</h1>
     <img src="<%=request.getContextPath() %>/4.jpeg" />
     <h1>聚类</h1>

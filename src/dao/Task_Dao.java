@@ -81,6 +81,33 @@ public class Task_Dao {
 		}		
 		return task_id_list;
 	}
+	
+	//删除task
+	public void delTask(int id) throws SQLException {
+		Connection conn=DbUtil.getConnection();
+		String sql=""+"delete from task "+" where id=?";
+		//将sql语句加载到驱动程序，但不执行
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		//给sql语句传递参数(从entity动态传参)
+		ptmt.setInt(1,id);
+		//执行sql语句
+		ptmt.execute();
+	}
+	
+	//根据task_id判断这道题是否存在
+	public int CheckLogByTask(int id) throws SQLException {
+		int res = 0;
+		Connection conn=DbUtil.getConnection();
+		String sql="select COUNT(*) from task where id="+"?";
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ptmt.setInt(1,id);
+		ResultSet rs=ptmt.executeQuery();
+		while(rs.next()) {
+			res = rs.getInt(1);
+		}
+		//System.out.println("select count结果是："+res);
+		return res;
+	}
 
 }
 

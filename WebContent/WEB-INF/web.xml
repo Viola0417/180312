@@ -162,6 +162,14 @@
     <url-pattern>/servlet/DeleteStuServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <servlet-class>servlet.DeleteTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <url-pattern>/servlet/DeleteTaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>AlgoKindServlet</servlet-name>
     <servlet-class>servlet.AlgoKindServlet</servlet-class>
   </servlet>
