@@ -76,9 +76,14 @@ public class ParseTest {
 				test_list.add(s);
 			}
 		}
-		
+		List<String> new_list = new ArrayList<String>();
+		for(int i=0;i<test_list.size();i++) {
+			if((!test_list.get(i).equals(""))&&(test_list.get(i)!=null)) {
+				new_list.add(test_list.get(i));
+			}
+		}
 		//System.out.println(test_list);
-		return test_list;
+		return new_list;
 	}
 
 	/**

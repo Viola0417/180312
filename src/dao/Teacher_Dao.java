@@ -19,6 +19,8 @@ public class Teacher_Dao {
 		ptmt.setString(2, t.getT_password());
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	public void updateTeacher(Teacher t) throws SQLException {
 		//根据老师姓名修改老师密码
@@ -32,6 +34,8 @@ public class Teacher_Dao {
 		ptmt.setString(2, t.getT_name());
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	public void delTeacher(String name) throws SQLException {
 		Connection conn=DbUtil.getConnection();
@@ -42,25 +46,30 @@ public class Teacher_Dao {
 		ptmt.setString(1,name);
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	public List<Teacher> multiquery() throws SQLException{
 		//System.out.println("--------------");
 		//System.out.println("在dao文件");
 		Connection conn=DbUtil.getConnection();
-		Statement statement = conn.createStatement();
+		//Statement statement = conn.createStatement();
         String sql="select  * from teacher ";
-        ResultSet set = statement.executeQuery(sql);//执行
-        
+        //ResultSet set = statement.executeQuery(sql);//执行
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+		ResultSet rs=ptmt.executeQuery();
         List<Teacher> tch = new ArrayList<Teacher>();
         Teacher t=null;
-        while (set.next()){
+        while (rs.next()){
         	t=new Teacher();
-        	t.setT_name(set.getString("name"));
-        	t.setT_password(set.getString("password"));
+        	t.setT_name(rs.getString("name"));
+        	t.setT_password(rs.getString("password"));
         	tch.add(t);
             //System.out.println(set.getString("name") + set.getString("password"));
         }
+		ptmt.close();
+		conn.close();
         //System.out.println("--------------");
 		return tch;
 		
@@ -82,6 +91,8 @@ public class Teacher_Dao {
 			t.setT_password(rs.getString("password"));
 			//System.out.println(t.getT_password());
 		}
+		ptmt.close();
+		conn.close();
 		return t;
 	}
 	

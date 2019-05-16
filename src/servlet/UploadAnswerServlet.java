@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import service.calculation;
 import service.split;
+import service.writeExcel;
 import service.ParseTest;
 import dao.Log_Dao;
 import entity.Log;
@@ -69,6 +71,7 @@ public class UploadAnswerServlet extends HttpServlet {
 		HttpSession  hs = request.getSession();
 		
 		int stu_id = (int) hs.getAttribute("stu_id");
+		int b = stu_id % 100;
 		//HttpSession  hs = request.getSession();
 		int task_id = (int) hs.getAttribute("task_id");
 		String algo = (String) hs.getAttribute("algo");
@@ -76,6 +79,47 @@ public class UploadAnswerServlet extends HttpServlet {
 		System.out.println(algo+"   "+description);
 		//System.out.println("当前学生的学号是:"+stu_id+"，他做答的题目是："+task_id);
 		
+		//根据学号生成新的answer文件
+		ServletContext context = this.getServletContext();
+		String test_file_path = context.getRealPath(task_id+"/answer");
+		File file = new File(test_file_path);
+		if(file.exists()) {
+			//System.out.println("文件存在");
+			//String[] names={"answer.xlsx"};
+	       
+	      //把原有的test文件打乱顺序
+	        //+++++++++++++++++++++++++++++++++++++++++++++==
+			//System.out.println("学生上传答案地址:"+f_path_2);
+			InputStream inputStream = new FileInputStream(test_file_path);
+			String suffix = "xlsx";
+			int startRow = 0;
+		
+			//List<String[]> result = 
+						//parser.parseExcel(inputStream, suffix, startRow);
+			ParseTest xlsMain = new ParseTest();
+			//split s = new split();
+			calculation c = new calculation();
+			//Student student = null;
+			List<String> rvs_list = new ArrayList<String>();
+			String rvs_path =  request.getServletContext().getRealPath("./")+File.separator+stu_id+"_"+task_id+"_answer";
+			System.out.println(rvs_path);
+			
+			List<String> standard_list =  xlsMain.readXls(inputStream,suffix,startRow);
+			System.out.println("从原答案读出的长度为："+standard_list.size()+"内容是："+standard_list);
+			if(b==1 || b==0) {
+				rvs_list = standard_list;
+			}else {
+				rvs_list = c.reverse(standard_list, stu_id, b);
+			}
+			
+			writeExcel w = new writeExcel();
+			try {
+				w.we(rvs_list,rvs_path);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("结束");
 		
 		//先上传学生的做答文件
 		//检测是否为多媒体上传
@@ -140,24 +184,27 @@ public class UploadAnswerServlet extends HttpServlet {
 		}
 		
 		//对比测试集标准答案与学生上传的答案
+		/*
 		String f_path_1 = request.getServletContext().getRealPath("./")+File.separator+TASK_DIRECTORY+File.separator+ANSWER;
-		//System.out.println("标准答案文件地址："+f_path_1);
+		System.out.println("标准答案文件地址："+f_path_1);
 		InputStream inputStream_1 = new FileInputStream(f_path_1);
+		*/
+		InputStream inputStream_1 = new FileInputStream(rvs_path);
 		String f_path_2 = uploadPath + File.separator + LIST_NAME;
 		//System.out.println("学生上传答案地址:"+f_path_2);
 		InputStream inputStream_2 = new FileInputStream(f_path_2);
-		String suffix = "xlsx";
-		int startRow = 0;
+		suffix = "xlsx";
+		startRow = 0;
 	
 		//List<String[]> result = 
 					//parser.parseExcel(inputStream, suffix, startRow);
-		ParseTest xlsMain = new ParseTest();
+		xlsMain = new ParseTest();
 		split s = new split();
-		calculation c = new calculation();
 		//Student student = null;
-		List<String> standard_list =  xlsMain.readXls(inputStream_1,suffix,startRow);
+		standard_list =  xlsMain.readXls(inputStream_1,suffix,startRow);
 		List<String> input_list = xlsMain.readXls(inputStream_2,suffix,startRow);
 		int list_len = standard_list.size();
+		System.out.println("list_len是："+list_len);
 		//正确率a=正确识别出的个体总数/识别出的个体总数
 		List<Integer> a_list = new ArrayList<Integer>();
 		
@@ -200,6 +247,9 @@ public class UploadAnswerServlet extends HttpServlet {
 		//计算F
 		double F = 0;
 		F = (R * P) / (R + P);
+		if(R+P==0) {
+			F=0;
+		}
 		//System.out.println("F是："+F);
 		//System.out.println("执行结束");
 		
@@ -290,6 +340,6 @@ public class UploadAnswerServlet extends HttpServlet {
 		response.sendRedirect("../ShowRes.jsp");
 		//request.getRequestDispatcher("../ShowRes.jsp").forward(request, response);
 		//System.out.println("执行结束");
+		}
 	}
-
 }

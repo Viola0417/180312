@@ -6,6 +6,8 @@ import entity.F_stu_id;
 import entity.Log;
 import entity.Student;
 import service.ReadExcel;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -15,26 +17,28 @@ import java.util.List;
 
 public class Try {
 	public static void main(String[] args) throws Exception {
-		//Log l = new Log();
-		Log_Dao l_dao = new Log_Dao();
+
+        String f_path_2 = "D:\\t_answer.xlsx";
+		//System.out.println("学生上传答案地址:"+f_path_2);
+		InputStream inputStream_2 = new FileInputStream(f_path_2);
+		String suffix = "xlsx";
+		int startRow = 0;
+	
+		//List<String[]> result = 
+					//parser.parseExcel(inputStream, suffix, startRow);
+		ParseTest xlsMain = new ParseTest();
+
 		
-        calculation c = new calculation();
-		//rank = c.Cal_Log_Rank(l);
-		//rank = c.Cal_Stu_Rank(l);
-		/*
-		List<Integer> f = new ArrayList<Integer>();
-		f=c.classify_F(task_id);
-		String path = "C:\\Users\\think\\Downloads\\apache-tomcat-9.0.6-windows-x64 (1)\\apache-tomcat-9.0.6\\webapps\\JFC\\2.jpeg";
-		pie p = new pie();
-		p.generatePieChart(f, path);
-		*/
-		//multicolumn m = new multicolumn();
-		//m.generateColumnChart();
-		List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
-		fs_list = c.calRankByTask(66);
-		for(F_stu_id f:fs_list) {
-			System.out.println(f.toString());
+		List<String> standard_list =  xlsMain.readXls(inputStream_2,suffix,startRow);
+		System.out.println(standard_list);
+		System.out.println("结束");
+		List<String> new_list = new ArrayList<String>();
+		for(int i=0;i<standard_list.size();i++) {
+			if((!standard_list.get(i).equals(""))&&(standard_list.get(i)!=null)) {
+				new_list.add(standard_list.get(i));
+			}
 		}
-		System.out.println("执行结束");
+		System.out.println(new_list);
 	}
+	
 }

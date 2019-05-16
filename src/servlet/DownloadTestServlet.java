@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -16,9 +18,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Task_Dao;
 import entity.Task;
+import service.ParseTest;
+import service.calculation;
+import service.writeExcel;
 /**
  * Servlet implementation class DownloadTestServlet
  */
@@ -49,6 +55,9 @@ public class DownloadTestServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		String task_id = null;
+		HttpSession  hs = request.getSession();
+		int stu_id = (int) hs.getAttribute("stu_id");
+		int b = stu_id % 100;
 		//String filename = null;
 		//System.out.println("准备下载test了");
 		request.setCharacterEncoding("utf-8");
@@ -60,10 +69,48 @@ public class DownloadTestServlet extends HttpServlet {
 		if(file.exists()) {
 			//System.out.println("文件存在");
 			String[] names={"test.xlsx"};
-	        FileInputStream input_test = new FileInputStream(new File(test_file_path));
+	        //FileInputStream input_test = new FileInputStream(new File(test_file_path));
 	       // FileInputStream input_test = new FileInputStream(new File(test_file_path));
 	        //FileInputStream[] inputs={input_train,input_test};
+	       
+	      //把原有的test文件打乱顺序
+	        //+++++++++++++++++++++++++++++++++++++++++++++==
+			//System.out.println("学生上传答案地址:"+f_path_2);
+			InputStream inputStream = new FileInputStream(test_file_path);
+			String suffix = "xlsx";
+			int startRow = 0;
+		
+			//List<String[]> result = 
+						//parser.parseExcel(inputStream, suffix, startRow);
+			ParseTest xlsMain = new ParseTest();
+			//split s = new split();
+			calculation c = new calculation();
+			//Student student = null;
+			List<String> rvs_list = new ArrayList<String>();
+			String rvs_path =  request.getServletContext().getRealPath("./")+File.separator+stu_id+"_"+task_id+"_test";
+			System.out.println(rvs_path);
+			
+			List<String> standard_list =  xlsMain.readXls(inputStream,suffix,startRow);
+			if(b==1 || b==0) {
+				rvs_list = standard_list;
+			}else {
+				rvs_list = c.reverse(standard_list, stu_id, b);
+			}
+			
+			writeExcel w = new writeExcel();
+			try {
+				w.we(rvs_list,rvs_path);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("结束");
+	      //+++++++++++++++++++++++++++++++++++++++++++++==
+	        
+			FileInputStream input_test = new FileInputStream(rvs_path);
 	        FileInputStream[] inputs={input_test};
+	        
+	        
 	        
 	        //ZIP打包
 	        String zip_path =  request.getServletContext().getRealPath("./")+File.separator+"zip_test";

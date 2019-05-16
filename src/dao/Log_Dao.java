@@ -29,6 +29,8 @@ public class Log_Dao {
 			ptmt.setDouble(7, l.getP());
 		//执行sql语句
 			ptmt.execute();
+			ptmt.close();
+			conn.close();
 		}catch(Exception e) {
 			System.out.println("该数据已经存在了");
 		}
@@ -43,6 +45,8 @@ public class Log_Dao {
 		ptmt.setInt(1,stu_id);
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	public void delLogbyTask(int task_id) throws SQLException {
@@ -54,6 +58,8 @@ public class Log_Dao {
 		ptmt.setInt(1,task_id);
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	public List<Log> query() throws SQLException {
@@ -78,6 +84,8 @@ public class Log_Dao {
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
+		ptmt.close();
+		conn.close();
 		return log_list;
 	}
 	
@@ -93,6 +101,8 @@ public class Log_Dao {
 		while(rs.next()) {
 			res = rs.getInt(1);
 		}
+		ptmt.close();
+		conn.close();
 		//System.out.println("select count结果是："+res);
 		return res;
 	}
@@ -109,6 +119,8 @@ public class Log_Dao {
 		while(rs.next()) {
 			res = rs.getInt(1);
 		}
+		ptmt.close();
+		conn.close();
 		//System.out.println("select count结果是："+res);
 		return res;
 	}
@@ -123,6 +135,8 @@ public class Log_Dao {
 		while(rs.next()) {
 			res = rs.getInt(1);
 		}
+		ptmt.close();
+		conn.close();
 		//System.out.println("select count结果是："+res);
 		return res;
 	}
@@ -151,6 +165,8 @@ public class Log_Dao {
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
+		ptmt.close();
+		conn.close();
 		return log_list;
 	}
 	
@@ -177,6 +193,8 @@ public class Log_Dao {
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
+		ptmt.close();
+		conn.close();
 		return log_list;
 	}
 	
@@ -195,6 +213,8 @@ public class Log_Dao {
 		while(rs.next()) {
 			F_list.add(rs.getDouble("F"));
 		}		
+		ptmt.close();
+		conn.close();
 		return F_list;
 	}
 	
@@ -223,6 +243,8 @@ public class Log_Dao {
 			l.setTime(rs.getTimestamp("time"));
 			log_list.add(l);
 		}		
+		ptmt.close();
+		conn.close();
 		return log_list;
 	}
 	
@@ -246,6 +268,8 @@ public class Log_Dao {
 			l.setAlgo(rs.getString("algo"));
 			l.setTime(rs.getTimestamp("time"));
 		}	
+		ptmt.close();
+		conn.close();
 		return l;
 	}
 	
@@ -261,6 +285,8 @@ public class Log_Dao {
 		while(rs.next()) {
 			F_list.add(rs.getDouble("F"));
 		}		
+		ptmt.close();
+		conn.close();
 		return F_list;
 	}
 	
@@ -281,7 +307,8 @@ public class Log_Dao {
 			l.setF(rs.getDouble("MAX(F)"));
 			log_list.add(l);
 		}
-		
+		ptmt.close();
+		conn.close();
 		return log_list;
 	}
 	
@@ -299,7 +326,8 @@ public class Log_Dao {
 			algo = rs.getString("algo");
 			algo_list.add(algo);
 		}
-		
+		ptmt.close();
+		conn.close();
 		return algo_list;
 	}
 }

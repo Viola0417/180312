@@ -192,4 +192,38 @@ public class calculation {
 		//System.out.println(log_list);
 		return fs_list;
 	}
+
+		public List<String> reverse(List<String> list,int stu_id,int b){
+			//int b = stu_id % 100;
+			int list_len = list.size();
+			int len = list_len;
+			int last = list_len % b;
+			//System.out.println(list_len);
+			int time = 0;
+			int i = 0;
+			//b=6;
+			List<String> new_list = new ArrayList<String>();
+			while(list_len>=b) {
+				for(i=time*b+b-1;i>=time*b;i--) {
+					new_list.add(list.get(i));
+				}
+				time++;
+				list_len=list_len-b;
+				System.out.println(new_list);
+			}
+			System.out.println("i="+i);
+			//ÄæĞò
+			/*
+			if(b!=0 && b!=1) {
+				
+			}*/
+			//System.out.println(last);
+			for(int j=len-last;j<len;j++) {
+				//System.out.println(j);
+				new_list.add(list.get(j));
+			}
+			System.out.println(new_list);
+			System.out.println("Ö´ĞĞ½áÊø");
+			return new_list;
+		}
 }

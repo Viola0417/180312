@@ -22,6 +22,8 @@ public class Student_Dao {
 			ptmt.setString(3, s.getS_password());
 		//执行sql语句
 			ptmt.execute();
+			ptmt.close();
+			conn.close();
 		}catch(Exception e) {
 			System.out.println("该数据已经存在了");
 		}
@@ -39,6 +41,8 @@ public class Student_Dao {
 		ptmt.setInt(2, s.getS_id());
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	public void delStudent(int id) throws SQLException {
@@ -50,26 +54,32 @@ public class Student_Dao {
 		ptmt.setInt(1,id);
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	public List<Student> multiquery() throws SQLException{
 		//System.out.println("--------------");
 		//System.out.println("在dao文件");
 		Connection conn=DbUtil.getConnection();
-		Statement statement = conn.createStatement();
+		//Statement statement = conn.createStatement();
         String sql="select  * from student ";
-        ResultSet set = statement.executeQuery(sql);//执行
+		PreparedStatement ptmt=conn.prepareStatement(sql);
+
+		ResultSet rs=ptmt.executeQuery();
         
         List<Student> stu = new ArrayList<Student>();
         Student s=null;
-        while (set.next()){
+        while (rs.next()){
         	s=new Student();
-        	s.setS_name(set.getString("name"));
-        	s.setS_id(set.getInt("id"));
-        	s.setS_password(set.getString("password"));
+        	s.setS_name(rs.getString("name"));
+        	s.setS_id(rs.getInt("id"));
+        	s.setS_password(rs.getString("password"));
         	stu.add(s);
             //System.out.println(set.getString("name") + set.getString("password"));
         }
+		ptmt.close();
+		conn.close();
         //System.out.println("--------------");
 		return stu;
 		
@@ -93,7 +103,8 @@ public class Student_Dao {
 			//System.out.println(t.getT_password());
 		}
 		
-		
+		ptmt.close();
+		conn.close();
 		return s;
 	}
 	
@@ -118,6 +129,8 @@ public class Student_Dao {
 				list.add(0);
 			}
 		}
+		ptmt.close();
+		conn.close();
 		return list;
 	}
 	
@@ -139,6 +152,8 @@ public class Student_Dao {
 			s.setS_id(rs.getInt("id"));
 			//System.out.println(t.getT_password());
 		}
+		ptmt.close();
+		conn.close();
 		return s;
 	}
 	
@@ -153,6 +168,8 @@ public class Student_Dao {
 		while(rs.next()) {
 			res = rs.getInt(1);
 		}
+		ptmt.close();
+		conn.close();
 		//System.out.println("select count结果是："+res);
 		return res;
 	}

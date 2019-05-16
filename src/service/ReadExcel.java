@@ -90,7 +90,14 @@ public class ReadExcel {
 			}
 		}
 		
-		return stuList;
+		List<Student> new_list = new ArrayList<Student>();
+		for(int i=0;i<stuList.size();i++) {
+			if(stuList.get(i)!=null) {
+				new_list.add(stuList.get(i));
+			}
+		}
+		//System.out.println(test_list);
+		return new_list;
 	}
 
 	/**

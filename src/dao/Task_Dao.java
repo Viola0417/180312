@@ -21,6 +21,8 @@ public class Task_Dao {
 			ptmt.setString(3, t.getT_kind());
 		//执行sql语句
 			ptmt.execute();
+			ptmt.close();
+			conn.close();
 		}catch(Exception e) {
 			System.out.println("该数据已经存在了");
 		}
@@ -40,9 +42,12 @@ public class Task_Dao {
 				t.setT_id(rs.getInt("id"));
 				id = t.getT_id();
 			}
+			ptmt.close();
+			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
+		
 		return id;
 	}
 	
@@ -63,6 +68,8 @@ public class Task_Dao {
 			t.setT_kind(rs.getString("kind"));
 			task.add(t);
 		}		
+		ptmt.close();
+		conn.close();
 		return task;
 	}
 	
@@ -79,6 +86,8 @@ public class Task_Dao {
 			task_id = rs.getInt("id");
 			task_id_list.add(task_id);
 		}		
+		ptmt.close();
+		conn.close();
 		return task_id_list;
 	}
 	
@@ -92,6 +101,8 @@ public class Task_Dao {
 		ptmt.setInt(1,id);
 		//执行sql语句
 		ptmt.execute();
+		ptmt.close();
+		conn.close();
 	}
 	
 	//根据task_id判断这道题是否存在
@@ -105,6 +116,8 @@ public class Task_Dao {
 		while(rs.next()) {
 			res = rs.getInt(1);
 		}
+		ptmt.close();
+		conn.close();
 		//System.out.println("select count结果是："+res);
 		return res;
 	}
