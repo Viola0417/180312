@@ -4,49 +4,74 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生查看结果</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>做答结果</title>
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/resume.min.css" rel="stylesheet">
+    
+
 </head>
-<body>
-<h1>您已经完成了做答</h1>
-<br/><br/>
-计算的召回率recall是：
-<% 
-	String R = (String)session.getAttribute("R"); 
-	out.print(R);
-%>
-<br/>
-计算的准确率precision是：
-<%
-	String P = (String)session.getAttribute("P");
-	out.print(P);
-%>
-<br/>
-综合的F是：
-<%
-	String F = (String)session.getAttribute("F");
-	out.print(F);
-%>
-<br/><br/>
-这道题做答记录为：
-<%
-	String log_num = (String)session.getAttribute("log_num");
-	out.print(log_num);
-%>
-这道题做答人数为：
-<%
-	String log_dis_num = (String)session.getAttribute("log_dis_num");
-	out.print(log_dis_num);
-%>
-<br/>
-在所有回答本题的记录中F的排名为：
-<%
-	String log_rank = (String)session.getAttribute("log_rank");
-	out.print(log_rank);
-%>
-在所有回答本题的学生中F的排名为：
-<%
-	String stu_rank = (String)session.getAttribute("stu_rank");
-	out.print(stu_rank);
-%>
+<body background="img/orange.jpg">
+ <body id="page-top">
+
+
+     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
+        <div class="my-auto">
+          <h3 class="mb-5">您已经完成了做答</h3>
+          <br/><br/>
+          <h4>
+		     计算的召回率recall是：
+			<% 
+			String R = (String)session.getAttribute("R"); 
+			out.print(R);
+			%>
+		 <br/>
+		  计算的准确率precision是：
+			<%
+		 	String P = (String)session.getAttribute("P");
+		 	out.print(P);
+			%>
+		<br/>
+		综合的F是：
+			<%
+			String F = (String)session.getAttribute("F");
+			out.print(F);
+			%>
+		<br/><br/>
+		这道题做答记录为：
+			<%
+			String log_num = (String)session.getAttribute("log_num");
+			out.print(log_num);
+			%>
+		条
+		<br/>
+		这道题做答人数为：
+			<%
+			String log_dis_num = (String)session.getAttribute("log_dis_num");
+			out.print(log_dis_num);
+			%>
+		人
+		<br/>
+		在所有回答本题的记录中F的排名为：第
+			<%
+			String log_rank = (String)session.getAttribute("log_rank");
+			out.print(log_rank);
+			%>
+		名
+		<br/>
+		在所有回答本题的学生中F的排名为：第
+			<%
+			String stu_rank = (String)session.getAttribute("stu_rank");
+			out.print(stu_rank);
+			%>
+		名
+		  </h4>
+        </div>
+      </section>
+
+  </body>
 </body>
 </html>

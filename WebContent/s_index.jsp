@@ -5,31 +5,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>学生登录界面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- CSS -->
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+<link rel="stylesheet" href="assets/css/reset.css">
+<link rel="stylesheet" href="assets/css/supersized.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
 </head>
-<script type='text/javascript'>
-	function login(){
-		//alert("你好呀");
-		var stu_name = document.getElementById('s_name').value;
-		var stu_pwd = document.getElementById("s_password").value;
-		if(stu_name == ''||stu_name == null){
-			alert("用户名不能为空");
-			return false;
-		}
-		else if(stu_pwd == ''||stu_pwd == null){
-			alert("密码不能为空");
-			return false;
-		}
-		return true;
-	}
-</script>
+
+
 <body>
-	<form method='post' name='s_form' action="/111/servlet/StuLoginServlet" onSubmit='return login();'>
-		用户名：<input type='text' id='s_name' name='s_name' style='height:30px;width:220px;font-size:20px;'><br>
-		密    码：<input type='password' id='s_password' name='s_password' style='height:30px;width:220px;font-size:20px;'><br>
-		<input type='reset' style='height:30px;width:60px;font-size:20px;'>
-		<input type='submit' style='height:30px;width:60px;font-size:20px;'>
+
+        <div class="page-container">
+            <h1>登录</h1>
+            <form action="/111/servlet/StuLoginServlet" method="post">
+                <input type="text" name="s_name" class="username" placeholder="用户名">
+                <input type="password" name="s_password" class="password" placeholder="密码">
+                <button type="submit">提交</button>
+                <div class="error"><span>+</span></div>
+            </form>
+        </div>  
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.8.2.min.js"></script>
+        <script src="assets/js/supersized.3.2.7.min.js"></script>
+        <script src="assets/js/supersized-init.js"></script>
+        <script src="assets/js/scripts.js"></script>
 		
-	</form>
-	
-</body>
+    </body>
+
 </html>

@@ -1,3 +1,4 @@
+
 package servlet;
 
 import java.io.IOException;
@@ -63,7 +64,8 @@ public class PrintTaskServlet extends HttpServlet {
 		//System.out.println("task²éÕÒ½áÊø");
 		//doGet(request, response);
 		request.getSession().setAttribute("tasklist", taskList);
-		response.sendRedirect("../TaskIndex.jsp");
+		response.sendRedirect("/111/index.jsp");
+		//response.sendRedirect("../TaskIndex.jsp");
 		//request.getRequestDispatcher("/TaskIndex.jsp").forward(request, response);
 	}
 

@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Student_Dao;
+import dao.Task_Dao;
 import dao.Teacher_Dao;
 import entity.Student;
+import entity.Task;
 import entity.Teacher;
 import util.DbUtil;
 /**
@@ -72,7 +78,25 @@ public class StuLoginServlet extends HttpServlet {
 					//System.out.println("ÃÜÂëÒ»ÖÂ");
 					request.getSession().setAttribute("logStudent", s_temp);
 					//Ìø×ªÒ³Ãæ
+					Task t = new Task();
+					Task_Dao t_dao = new Task_Dao();
+					List<Task> taskList = new ArrayList<Task>();
+					try {
+						taskList = t_dao.query();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					/*
+					for(Task t2:taskList) {
+						System.out.println(t2.toString());
+					}
+					*/
+					//System.out.println("task²éÕÒ½áÊø");
+					//doGet(request, response);
+					request.getSession().setAttribute("tasklist", taskList);
 					response.sendRedirect("../s_func.jsp");
+					//response.sendRedirect("../s_func.jsp");
 					//request.getRequestDispatcher("../s_func.jsp").forward(request, response);
 					}else {
 						//System.out.println("ÃÜÂë´íÎó");

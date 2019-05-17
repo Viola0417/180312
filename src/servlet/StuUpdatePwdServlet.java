@@ -50,7 +50,7 @@ public class StuUpdatePwdServlet extends HttpServlet {
 		//System.out.println("处理post请求");
 		String origin_password = request.getParameter("origin_password");
 		String new_password = request.getParameter("new_password");
-		//System.out.println("原来密码是："+origin_password+"新密码是："+new_password);
+		System.out.println("原来密码是："+origin_password+"新密码是："+new_password);
 		//先根据学号检查原来的密码输入是否正确
 		//获取学生学号
 		HttpSession  hs = request.getSession();

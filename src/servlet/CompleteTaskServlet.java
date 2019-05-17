@@ -40,29 +40,37 @@ public class CompleteTaskServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		//System.out.println("学生准备做答题目");
-		String task_id = null;
+		String task_id =request.getParameter("task_id2");
 		request.setCharacterEncoding("utf-8");
-		task_id=request.getParameter("task_id2");
-		//System.out.println("学生要做答的是："+task_id+"题目");
-		Task t = new Task();
-		Task_Dao t_dao = new Task_Dao();
-		int TaskNo = 0;
-		TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
-		//判断输入的题是否在数据库中
-		int enterTask = Integer.parseInt(task_id);
-		if(enterTask<=TaskNo&&enterTask>0) {
-			//System.out.println("要做答的题目在数据库中");
-			//把该题目存入session
-			request.getSession().setAttribute("task_id",enterTask);
-			response.sendRedirect("../s_addalgo.jsp");
-			
-		}else {
-			//System.out.println("要做答的题目不在数据库中");
-			String message="题目号码不正确";
+		if(task_id=="") {
+			System.out.println("得到的值为空");
+			String message="输入题号不能为空";
 			request.getSession().setAttribute("message", message);
 			response.sendRedirect("../Res.jsp");
-			//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
+			//return;
+		}else {
+			Task t = new Task();
+			Task_Dao t_dao = new Task_Dao();
+			int TaskNo = 0;
+			TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+			//判断输入的题是否在数据库中
+			int enterTask = Integer.parseInt(task_id);
+			if(enterTask<=TaskNo&&enterTask>0) {
+				//System.out.println("要做答的题目在数据库中");
+				//把该题目存入session
+				request.getSession().setAttribute("task_id",enterTask);
+				response.sendRedirect("../s_addalgo.jsp");
+				
+			}else {
+				//System.out.println("要做答的题目不在数据库中");
+				String message="题目号码不正确";
+				request.getSession().setAttribute("message", message);
+				response.sendRedirect("../Res.jsp");
+				//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
+			}
+		
 		}
+		//System.out.println("学生要做答的是："+task_id+"题目");
 	}
 
 }

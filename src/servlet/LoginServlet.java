@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("ÃÜÂëÒ»ÖÂ");
 					request.getSession().setAttribute("logTeacher", t_temp);
 					//Ìø×ªÒ³Ãæ
-					response.sendRedirect("/111/t_func.jsp");
+					response.sendRedirect("/111/UploadFileTry.jsp");
+					//response.sendRedirect("/111/t_func.jsp");
 					//request.getRequestDispatcher("/t_func.jsp").forward(request, response);
 					}else {
 						System.out.println("ÃÜÂë´íÎó");
