@@ -4,16 +4,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>上传答案</title>
+<title>老师上传答案文件</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/resume.min.css" rel="stylesheet">
 </head>
-<body>
-上传答案文件
-	<form method = "post" action = "/111/servlet/T_UploadAnswerServlet" enctype = "multipart/form-data">
-		上传答案：
-		<input type = "file" name = "uploadFile" />
-		<br/><br/>
-		<input type = "submit" value = "上传">
-	</form>
-<br/><br/>
+
+<body id="page-top" background="img/orange.jpg"  
+	style="background-repeat:no-repeat ;
+	background-size:100% 100%;
+	background-attachment: fixed;">
+
+
+     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
+        <div class="my-auto">
+          <h3 class="mb-5">上传答案文件</h3>
+          <br/><br/>
+          <h4>
+  		  <form method = "post" action = "/111/servlet/T_UploadAnswerServlet" enctype = "multipart/form-data">
+		  	<input type = "file" name = "uploadFile" />
+		  	<br/><br/>
+			<input type = "submit" value = "上传文件" class="btn-warning">	
+		  </form>
+		  </h4>
+        </div>
+      </section>
 </body>
 </html>

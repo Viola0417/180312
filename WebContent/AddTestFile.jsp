@@ -5,14 +5,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>老师上传测试集文件</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/resume.min.css" rel="stylesheet">
 </head>
-<body>
-上传测试集文件
-	<form method = "post" action = "/111/servlet/UploadTestServlet" enctype = "multipart/form-data">
-		上传测试集：
-		<input type = "file" name = "uploadFile" />
-		<br/><br/>
-		<input type = "submit" value = "上传">
-	</form>
+
+<body id="page-top" background="img/orange.jpg"  
+	style="background-repeat:no-repeat ;
+	background-size:100% 100%;
+	background-attachment: fixed;">
+
+
+     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
+        <div class="my-auto">
+          <h3 class="mb-5">上传测试集</h3>
+          <br/><br/>
+          <h4>
+  		  <form method = "post" action = "/111/servlet/UploadTestServlet" enctype = "multipart/form-data">
+		  	<input type = "file" name = "uploadFile" />
+		  	<br/><br/>
+			<input type = "submit" value = "上传文件" class="btn-warning">	
+		  </form>
+		  </h4>
+        </div>
+      </section>
 </body>
 </html>

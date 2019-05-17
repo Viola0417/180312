@@ -3,6 +3,9 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.Task_Dao;
 import dao.Teacher_Dao;
+import entity.Task;
 import entity.Teacher;
 import util.DbUtil;
 /**
@@ -58,10 +63,21 @@ public class LoginServlet extends HttpServlet {
 				//request.getRequestDispatcher("/t_logFail.jsp").forward(request, response);;
 				}else if(db_password.equals(t_password)) {
 					System.out.println("ÃÜÂëÒ»ÖÂ");
+					Task t = new Task();
+					Task_Dao task_dao = new Task_Dao();
+					List<Task> taskList = new ArrayList<Task>();
+					try {
+						taskList = task_dao.query();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					
+					request.getSession().setAttribute("tasklist", taskList);
 					request.getSession().setAttribute("logTeacher", t_temp);
 					//Ìø×ªÒ³Ãæ
-					response.sendRedirect("/111/UploadFileTry.jsp");
-					//response.sendRedirect("/111/t_func.jsp");
+					response.sendRedirect("/111/t_func.jsp");
 					//request.getRequestDispatcher("/t_func.jsp").forward(request, response);
 					}else {
 						System.out.println("ÃÜÂë´íÎó");

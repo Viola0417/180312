@@ -132,22 +132,24 @@
        <font color="black">
           <h1>查看题目</h1>  
           <br/><br/>
-        <table class="table table-striped table-bordered table-hover">
-        	<thead>
-    			 <tr>
-   			   		 <th>&emsp;&emsp;&emsp;题目编号</th>
-      				 <th>题目标题</th>
-      				 <th>题目描述</th>
-    			 </tr>
-  		   </thead>
-  		   <c:forEach items="${tasklist}" var="task">
-			 <tbody>
-                  <td>&emsp;&emsp;&emsp;<c:out value="${task.t_id}" /></td>
-                  <td><c:out value="${task.t_title}" /></td>
-                  </td><td><c:out value="${task.t_description}" /></td>
-            </c:forEach>
-           </tbody>
-       </table>  
+         	 <div class="container">
+		        <table class="table table-striped table-bordered table-hover">
+		        	<thead>
+		    			 <tr>
+		   			   		 <th>题目编号</th>
+		      				 <th>题目标题</th>
+		      				 <th>题目描述</th>
+		    			 </tr>
+		  		   </thead>
+		  		   <c:forEach items="${tasklist}" var="task">
+					 <tbody>
+		                  <td><c:out value="${task.t_id}" /></td>
+		                  <td><c:out value="${task.t_title}" /></td>
+		                  </td><td><c:out value="${task.t_description}" /></td>
+		            </c:forEach>
+		           </tbody>
+		       </table>
+       		</div>  
        </font>
        </div>
     </section>

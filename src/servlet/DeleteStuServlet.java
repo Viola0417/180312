@@ -42,38 +42,46 @@ public class DeleteStuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String s_id = null;
+		String s_id = request.getParameter("s_id");
 		request.setCharacterEncoding("utf-8");
-		s_id=request.getParameter("s_id");
-		//System.out.println("要被删除掉的学生的学号是："+s_id);
-		//判断这个学号是否存在
-		Student s = new Student();
-		Student_Dao s_dao = new Student_Dao();
-		Log_Dao l_dao = new Log_Dao();
-		int res = 0;
-		int stu_id = Integer.parseInt(s_id);
-		try {
-			//res=1学生存在；res=0学生不存在
-			res = s_dao.CheckLogByStu(stu_id);
-			if(res==0) {
-				//学生不存在的时候
-				String message="该学生不在本系统";
-				request.getSession().setAttribute("message", message);
-				response.sendRedirect("../Res.jsp");
-				//request.getRequestDispatcher("../Res.jsp").forward(request, response);
-			}else if(res==1) {
-				//学生存在的时候
-				s_dao.delStudent(stu_id);
-				l_dao.delLog(stu_id);
-				String message="该学生极其做题记录已经成功删除";
-				request.getSession().setAttribute("message", message);
-				response.sendRedirect("../Res.jsp");
-				//request.getRequestDispatcher("../Res.jsp").forward(request, response);
+		if(s_id=="") {
+			//System.out.println("得到的值为空");
+			String message="输入学号不能为空";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+			//return;
+		}else {
+			//System.out.println("要被删除掉的学生的学号是："+s_id);
+			//判断这个学号是否存在
+			Student s = new Student();
+			Student_Dao s_dao = new Student_Dao();
+			Log_Dao l_dao = new Log_Dao();
+			int res = 0;
+			int stu_id = Integer.parseInt(s_id);
+			try {
+				//res=1学生存在；res=0学生不存在
+				res = s_dao.CheckLogByStu(stu_id);
+				if(res==0) {
+					//学生不存在的时候
+					String message="该学生不在本系统";
+					request.getSession().setAttribute("message", message);
+					response.sendRedirect("../Res.jsp");
+					//request.getRequestDispatcher("../Res.jsp").forward(request, response);
+				}else if(res==1) {
+					//学生存在的时候
+					s_dao.delStudent(stu_id);
+					l_dao.delLog(stu_id);
+					String message="该学生极其做题记录已经成功删除";
+					request.getSession().setAttribute("message", message);
+					response.sendRedirect("../Res.jsp");
+					//request.getRequestDispatcher("../Res.jsp").forward(request, response);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 
 	}
 }

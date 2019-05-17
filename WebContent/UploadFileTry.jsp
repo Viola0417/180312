@@ -30,10 +30,14 @@
     -->
     <link href="css/resume.min.css" rel="stylesheet">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+
+
+	<!--  
+	
 	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" href="assets/css/supersized.css">
 	<link rel="stylesheet" href="assets/css/style.css">
-
+	-->
   </head>
 
   <body id="page-top">
@@ -74,6 +78,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#delTask">删除题目</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#checkTask">查看题目</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -82,108 +89,163 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
 		<div class="my-auto">
-          <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;面向数据挖掘与机器学习的评测系统  </h1>
+          <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;面向数据挖掘与机器学习的评测系统  </h3>
          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
          </div>
       </section>
       
-     
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="addStu">
- 
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="addStu">
         <div class="my-auto">
-          <h1>导入学生</h1> 
-  		  <form method = "post" action = "/111/servlet/UploadServlet" enctype = "multipart/form-data">
-		  	<input type = "file" name = "uploadFile" />
-		  	<br/><br/>
-			<input type = "submit" value = "上传文件" class="btn-warning">	
-		  </form> 
+          <div class="mb-5">
+			<h4>导入学生</h4>
+				<br/><br/><br/>
+	  		  <form method = "post" action = "/111/servlet/UploadServlet" enctype = "multipart/form-data">
+			  	<input type = "file" name = "uploadFile" />
+				&emsp;<input type = "submit" value = "上传文件" class="btn-warning">	
+			  </form>
+		 </div>
         </div>
-      </section>
+   </section>
+
+    
       
-      
+  
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="addTask">
         <div class="my-auto">
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
-				<h3>请上传你的做答描述</h3>
+				<h4>新增题目</h4>
             </div>
           </div>
-          <br/>
           <div class="mb-5">
-		<h4>
-		<form method = "post" action = "/111/servlet/UploadDesServlet">
-	    <p>
-		关键算法：
+		<h5>
 		<br/>
-     	<input type="checkbox" name="algo" value="SVM" />SVM&emsp;
-     	<input type="checkbox" name="algo" value="决策树" /> 决策树&emsp;
-     	<input type="checkbox" name="algo" value="KNN最近邻" />KNN最近邻&emsp;
-     	<input type="checkbox" name="algo" value="随机森林" />随机森林&emsp;
-     	<input type="checkbox" name="algo" value="朴素贝叶斯" />朴素贝叶斯&emsp;
-     	<input type="checkbox" name="algo" value="逻辑回归" />逻辑回归&emsp;
-     	<input type="checkbox" name="algo" value="其他" />其他
-   		</p>
-   		<br>
-		<textarea rows="3" cols="60" id='description' name='description' class="username" placeholder="步骤描述"></textarea>
-		<br/><br/>
-		<input type = "submit" value = "提交描述" class="btn-warning">	
+		<form method = "post" action = "/111/servlet/UploadTaskDesServlet" name = "task_form">
+			<input type='text' id='title_name' name='title_name' class="username" placeholder="标题"><br/>
+			<br/>
+			<textarea rows="3" cols="60" id='description_name' name='description_name' class="username" placeholder="步骤描述"></textarea>
+			<p>
+			<br/>
+			题目类别：
+	     	<input type="checkbox" name="checkbox" value="回归" /> 回归
+	     	<input type="checkbox" name="checkbox" value="聚类" /> 聚类
+	     	<input type="checkbox" name="checkbox" value="其他" />其他
+	   		</p>
+	   		<input type = "submit" value = "增加题目" class="btn-warning">
+			
 		</form>
-		
-		</h4>
-
+		</h5>
 	</div>
         </div>
       </section>
 
       
-      
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="uploadTest">
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="uploadTest">
         <div class="my-auto">
-          <h1>上传训练集</h1>   
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+				<h4>上传测试集</h4>
+            </div>
+          </div>
+          <br/>
+          <div class="mb-5">
+          	<br/>
+			<form method='post' name='task_form' action="/111/servlet/TestNumServlet">
+				<input type='text' id='task_id1' name='task_id1' class="username" placeholder="题号">
+				&emsp;<input type='submit' value="提交" class="btn-warning">		
+			</form>
+			<br/>
+			<a href="#checkTask">查看题目</a>
+		</div>
         </div>
       </section>
       
       
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="checkRank">
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="checkRank">
         <div class="my-auto">
-          <h1>查看学生做题情况</h1>    
+          <div class="mb-5">
+			<h4>查看本题做题情况</h4>
+				<form method='post' name='task_form' action="/111/servlet/ShowTaskRankServlet">
+					<input type='text' id='task_id' name='task_id' class="username" placeholder="题号">
+					&emsp;<input type='submit' value="提交" class="btn-warning">		
+				</form>
+				<br/><br/><br/>
+			<h4>查看本学生做题情况</h4>
+				<form method='post' name='stu_form' action="/111/servlet/ShowStuRankServlet">
+					<input type='text' id='stu_id' name='stu_id' class="username" placeholder="学号">
+					&emsp;<input type='submit' value="提交" class="btn-warning">		
+				</form>
+				<br/><br/><br/>			
+			<h4>查看题目类别与算法间关系</h4>
+				<form method='post' action="/111/servlet/AlgoKindServlet">
+					&emsp;&emsp;&emsp;&emsp;&emsp;<input type='submit' value='查看' class="btn-warning">		
+				</form>
+		  </div>
         </div>
-      </section>
+   </section>
       
       
       
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="delStu">
-   	   <div class="mb-5">
-       <font color="black">
-          <h1>删除学生</h1>  
-         </font>
-       </div>
-    </section>
-      
-      
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="delTask">
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="delStu">
         <div class="my-auto">
-         <font color="black">
-          <h1>删除题目</h1>
-            </font>       
+          <div class="mb-5">
+			<h4>删除学生</h4>
+				<br/><br/><br/>
+				<form method='post'  action="/111/servlet/DeleteStuServlet">
+					<input type='text' id=s_id' name='s_id' class="username" placeholder="学号">
+					&emsp;<input type='submit' value="提交" class="btn-warning">		
+				</form>
+		 </div>
         </div>
-      </section>
+   </section>
+      
+     
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="delTask">
+        <div class="my-auto">
+          <div class="mb-5">
+			<h4>删除题目</h4>
+				<br/><br/><br/>
+				<form method='post'  action="/111/servlet/DeleteTaskServlet">
+					<input type='text' id=t_id' name='t_id' class="username" placeholder="题号">
+					&emsp;<input type='submit' value="提交" class="btn-warning">		
+				</form>
+		 </div>
+        </div>
+   </section>
+   
+   
+   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="checkTask">
+        <div class="my-auto">
+          <div class="mb-5">
+			<h4>查看题目</h4>
+				<br/><br/><br/>
+		        <table class="table table-striped table-bordered table-hover">
+		        	<thead>
+		    			 <tr>
+		   			   		 <th>&emsp;&emsp;&emsp;题目编号</th>
+		      				 <th>题目标题</th>
+		      				 <th>题目描述</th>
+		    			 </tr>
+		  		   </thead>
+		  		   <c:forEach items="${tasklist}" var="task">
+					 <tbody>
+		                  <td>&emsp;&emsp;&emsp;<c:out value="${task.t_id}" /></td>
+		                  <td><c:out value="${task.t_title}" /></td>
+		                  </td><td><c:out value="${task.t_description}" /></td>
+		            </c:forEach>
+		           </tbody>
+		       </table>  
+		 </div>
+        </div>
+   </section>
 
    
     </div>
 
-    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/jquery-1.8.2.min.js"></script>
-  
-    <script src="assets/js/supersized.3.2.7.min.js"></script>
-      <!-- 
-    <script src="assets/js/supersized-init.js"></script>
-   -->
-    <script src="assets/js/scripts.js"></script>
-    <!-- Plugin JavaScript -->
+
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
