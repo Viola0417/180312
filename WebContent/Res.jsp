@@ -22,7 +22,7 @@
     <link href="css/resume.min.css" rel="stylesheet">
 </head>
 
-<body id="page-top" background="img/orange.jpg"  
+<body id="page-top" background="img/back.jpg"  
 	style="background-repeat:no-repeat ;
 	background-size:100% 100%;
 	background-attachment: fixed;">
@@ -33,6 +33,7 @@
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
+				<br/><br/><br/><br/>
 				<h3>message</h3>
             </div>
           </div>

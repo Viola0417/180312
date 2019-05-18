@@ -48,10 +48,14 @@ public class StuUpdatePwdServlet extends HttpServlet {
 		String origin_password = request.getParameter("origin_password");
 		String new_password = request.getParameter("new_password");
 		
-		if((origin_password=="")&&(new_password=="")) {
-			String message="输入密码不能为空";
+		if(origin_password==""){
+			String message="输入原密码不能为空";
 			request.getSession().setAttribute("message", message);
 			response.sendRedirect("../Res.jsp");			
+		}else if(new_password==""){
+			String message="输入新密码不能为空";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");	
 		}else {
 			System.out.println("原来密码是："+origin_password+"新密码是："+new_password);
 			//先根据学号检查原来的密码输入是否正确
@@ -73,7 +77,7 @@ public class StuUpdatePwdServlet extends HttpServlet {
 					response.sendRedirect("../Res.jsp");
 					//request.getRequestDispatcher("../s_UpdatePwdSuc.jsp").forward(request, response);
 				}else {
-					String message="密码输入错误，请返回重新输入";
+					String message="原密码输入错误，请返回重新输入";
 					request.getSession().setAttribute("message", message);
 					response.sendRedirect("../Res.jsp");
 					//request.getRequestDispatcher("../s_UpdatePwdFail.jsp").forward(request, response);

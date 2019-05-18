@@ -14,14 +14,15 @@
     
 
 </head>
-<body background="img/orange.jpg">
+<body background="img/back.jpg">
  <body id="page-top">
 
 
      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
         <div class="my-auto">
+        <br/><br/><br/><br/>
           <h3 class="mb-5">您已经完成了做答</h3>
-          <br/><br/>
+          
           <h4>
 		     计算的召回率recall是：
 			<% 

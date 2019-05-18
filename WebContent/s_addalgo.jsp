@@ -15,7 +15,7 @@
 
 </head>
 
- <body id="page-top" background="img/orange.jpg"  
+ <body id="page-top" background="img/back.jpg"  
 	style="background-repeat:no-repeat ;
 	background-size:100% 100%;
 	background-attachment: fixed;">
@@ -26,14 +26,15 @@
 
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
-				<h3>请上传你的做答描述</h3>
+            <br/><br/><br/><br/><br/>
+				<h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;请上传你的做答描述</h3>
             </div>
           </div>
-          <br/>
           <div class="mb-5">
 		<h4>
 		<form method = "post" action = "/111/servlet/UploadDesServlet">
 	    <p>
+	    <br/>
 		关键算法：
 		<br/>
      	<input type="checkbox" name="algo" value="SVM" />SVM&emsp;

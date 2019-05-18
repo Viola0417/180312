@@ -15,7 +15,7 @@
 
 </head>
 
-<body id="page-top" background="img/orange.jpg"  
+<body id="page-top" background="img/back.jpg"  
 	style="background-repeat:no-repeat ;
 	background-size:100% 100%;
 	background-attachment: fixed;">
