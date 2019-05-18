@@ -87,25 +87,15 @@ public class StuLoginServlet extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					/*
-					for(Task t2:taskList) {
-						System.out.println(t2.toString());
-					}
-					*/
-					//System.out.println("task查找结束");
-					//doGet(request, response);
+
 					request.getSession().setAttribute("tasklist", taskList);
 					response.sendRedirect("../s_func.jsp");
-					//response.sendRedirect("../s_func.jsp");
 					//request.getRequestDispatcher("../s_func.jsp").forward(request, response);
 					}else {
 						//System.out.println("密码错误");
 						String message="用户名与密码不匹配";
 						request.getSession().setAttribute("message", message);
 						response.sendRedirect("../Res.jsp");
-						//response.sendRedirect("../s_logFail.jsp");
-						//request.getRequestDispatcher("../s_logFail.jsp").forward(request, response);
-						//request.getRequestDispatcher("../t_index.jsp").forward(request, response);
 					}
 		    
 		} catch(Exception e) {

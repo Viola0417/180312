@@ -218,8 +218,6 @@
    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="checkTask">
         <div class="my-auto">
           <div class="mb-5">
-			<h4>查看题目</h4>
-				<br/><br/><br/>
 		        <table class="table table-striped table-bordered table-hover">
 		        	<thead>
 		    			 <tr>

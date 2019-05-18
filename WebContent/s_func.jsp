@@ -6,6 +6,7 @@
 <html lang="en">
 
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -13,25 +14,12 @@
 
     <title>学生功能界面</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-	
-    <!-- Custom styles for this template 
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    -->
     <link href="css/resume.min.css" rel="stylesheet">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/supersized.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 
   </head>
 
@@ -52,7 +40,7 @@
 		<br/><br/>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item">
+         <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">首页</a>
           </li>
           <li class="nav-item">
@@ -78,61 +66,68 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
 		<div class="my-auto">
-          <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;面向数据挖掘与机器学习的评测系统  </h1>
+          <h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;面向数据挖掘与机器学习的评测系统  </h3>
          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
          </div>
       </section>
       
-
       
-      
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="completeTask">
- 
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="completeTask">
         <div class="my-auto">
-          <h1>做答</h1>
-		    <form method='post' name='task_form' action="/111/servlet/CompleteTaskServlet" onsubmit="return login_2()">
-		    <input type='text' id='task_id2' name='task_id2' class="username" placeholder="题号"><br>
-		    <button type="submit">提交</button>
-            <div class="error"><span>+</span></div>	
-	        </form> 
-        </div>
-
-      </section>
-
-      
-      
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="downloadTrain">
-        <div class="my-auto">
-          <h1>下载训练集</h1>   
-          	<form method='post' name='task_form' action="/111/servlet/DownloadTaskServlet">
-		    <input type='text' id='task_id1' name='task_id1' class="username" placeholder="题号"><br>
-		    <button type="submit">提交</button>
-            <div class="error"><span>+</span></div>	
-	        </form> 
+				<h4>做答</h4>
+          <br/>
+          <div class="mb-5">
+          	<br/>
+			    <form method='post' name='task_form' action="/111/servlet/CompleteTaskServlet">
+			    <input type='text' id='task_id2' name='task_id2' class="username" placeholder="题号">
+			    &emsp;<input type = "submit" value = "做答" class="btn-warning">	
+		        </form> 
+			<br/>
+			<a href="#showTask">查看题目</a>
+		</div>
         </div>
       </section>
       
       
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="downloadTest">
+      
+     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="downloadTrain">
         <div class="my-auto">
-          <h1>下载测试集</h1>    
-            <form method='post' name='task_form' action="/111/servlet/DownloadTestServlet">
-		    <input type='text' id='task_id3' name='task_id3' class="username" placeholder="题号"><br>
-		    <button type="submit">提交</button>
-            <div class="error"><span>+</span></div>	
-	        </form> 
+          <div class="mb-5">
+			<h4>下载训练集</h4>
+			<br/><br/><br/>
+	          	<form method='post' name='task_form' action="/111/servlet/DownloadTaskServlet">
+			    <input type='text' id='task_id1' name='task_id1' class="username" placeholder="题号">
+			    &emsp;<input type = "submit" value = "下载" class="btn-warning">	
+		        </form> 
+		 </div>
+		 <a href="#showTask">查看题目</a>
+        </div>
+   </section>
+
+    
+      
+  
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="downloadTest">
+        <div class="my-auto">
+          <div class="mb-5">
+			<h4>下载测试集</h4>
+			<br/><br/><br/>
+	            <form method='post' name='task_form' action="/111/servlet/DownloadTestServlet">
+			    <input type='text' id='task_id3' name='task_id3' class="username" placeholder="题号">
+			    &emsp;<input type = "submit" value = "下载" class="btn-warning">	
+		        </form> 
+		 </div>
+		 <a href="#showTask">查看题目</a>
         </div>
       </section>
+
       
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="showTask">
-      <!--  
-     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="showTask">
-     -->
-   	   <div class="mb-5">
-       <font color="black">
-          <h1>查看题目</h1>  
-          <br/><br/>
-         	 <div class="container">
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="showTask">
+        <div class="my-auto">
+          <div class="mb-5">
+          	<h4>查看题目</h4>
+			<br/><br/><br/>
+ 			<div class="container">
 		        <table class="table table-striped table-bordered table-hover">
 		        	<thead>
 		    			 <tr>
@@ -150,41 +145,31 @@
 		           </tbody>
 		       </table>
        		</div>  
-       </font>
-       </div>
-    </section>
-      
-      
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="modifyPwd">
-        <div class="my-auto">
-         <font color="black">
-          <h1>修改密码</h1>
-			<div class="page-container">
-	        <form action="/111/servlet/StuUpdatePwdServlet" method="post">
-                <input type="password" name="origin_password" class="password" placeholder="原始密码">
-                <input type="password" name="new_password" class="password" placeholder="新密码">
-                <button type="submit">提交</button>
-                <div class="error"><span>+</span></div>
-            </form>
-            </div>  
-            </font>       
+		</div>
         </div>
       </section>
-
+   
+      
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="modifyPwd">
+        <div class="my-auto">
+          <div class="mb-5">
+			<h4>修改密码</h4>
+				<br/><br/><br/>
+		        <form action="/111/servlet/StuUpdatePwdServlet" method="post">
+	                <input type="password" name="origin_password" class="password" placeholder="原始密码"><br/><br/>
+	                <input type="password" name="new_password" class="password" placeholder="新密码"><br/><br/>
+	                <input type = "submit" value = "修改" class="btn-warning">	
+	            </form>
+		 </div>
+        </div>
+   </section>
+      
    
     </div>
 
-    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/jquery-1.8.2.min.js"></script>
-  
-    <script src="assets/js/supersized.3.2.7.min.js"></script>
-      <!-- 
-    <script src="assets/js/supersized-init.js"></script>
-   -->
-    <script src="assets/js/scripts.js"></script>
-    <!-- Plugin JavaScript -->
+
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
@@ -193,4 +178,7 @@
   </body>
 
 </html>
+
+
+
 
