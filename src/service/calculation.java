@@ -130,17 +130,11 @@ public class calculation {
 	
 	//根据题目编号得到大家的排名
 	public List<F_stu_id> calRankByTask(int task_id) throws SQLException{
-		//System.out.println("过来了");
+		System.out.println("过来了!!!!!!!!!!!!!!!!!!!!!");
 		Log_Dao l_dao = new Log_Dao();
-		//List<Log> rank_log_list = new ArrayList<Log>();
 		//所有做过这道题的人的学号+他们最高的F
 		List<Log> log_list = new ArrayList<Log>();
 		log_list = l_dao.QueryMaxF(task_id);
-		/*
-		for(Log l:log_list) {
-			System.out.println(l.toString());
-		}
-		*/
 		double max_f = 0;
 		int max_f_stu = 0;
 		//冒泡排序,把F最大的放在后面
@@ -155,13 +149,21 @@ public class calculation {
 					log_list.get(j+1).setStu_id(max_f_stu);
 				}
 			}
-			//System.out.println(log_list);
 		}
 	    //逆序
 		F_stu_id fs = new F_stu_id();
 		List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
 		int no = 1;//记录排名
 		int no_same = 0;//记录一样的F
+		if(log_list.size()==1) {
+			fs = new F_stu_id();
+			fs.setF(log_list.get(0).getF());
+			fs.setNo(1);
+			fs.setStu_id(log_list.get(0).getStu_id());
+			fs_list.add(fs);
+			return fs_list;
+		}
+		System.out.println("log_list是："+log_list);
 		for(int i=log_list.size()-1;i>0;i--) {
 		    fs = new F_stu_id();
 			fs.setF(log_list.get(i).getF());
@@ -181,15 +183,22 @@ public class calculation {
 					fs.setNo(no);
 					fs_list.add(fs);
 			}
-			//有F值相同的情况
 
 		}
-		/*
-		for(F_stu_id f:fs_list) {
-			System.out.println(f.toString());
+		System.out.println("fs_list现在有几个元素"+fs_list.size());
+		double last_F = fs_list.get(fs_list.size()-1).getF();
+		System.out.println("现在最后一个F是："+last_F);
+		//把最后一个加进来
+		System.out.println("现在的no_same是："+no_same);
+	    fs = new F_stu_id();
+		fs.setF(log_list.get(0).getF());
+		fs.setStu_id(log_list.get(0).getStu_id()); 
+		if(last_F==log_list.get(0).getF()) {
+			fs.setNo(no);
+		}else {
+			fs.setNo(no+no_same+1);
 		}
-		*/
-		//System.out.println(log_list);
+		fs_list.add(fs);
 		return fs_list;
 	}
 

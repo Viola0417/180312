@@ -82,6 +82,7 @@ public class T_UploadAnswerServlet extends HttpServlet {
 		upload.setSizeMax(MAX_REQUEST_SIZE);
 		//中文处理
 		upload.setHeaderEncoding("UTF-8");
+		
 		String uploadPath = request.getServletContext().getRealPath("./")+File.separator+task_id;
 		
 		//System.out.println(uploadPath);
@@ -95,22 +96,36 @@ public class T_UploadAnswerServlet extends HttpServlet {
 			//解析请求的内容提取文件数据
 			@SuppressWarnings("unchecked")
 			List<FileItem> formItems = upload.parseRequest(request);
+			
 			if(formItems != null && formItems.size() > 0) {
 				//迭代表单数据
 				for(FileItem item:formItems) {
 					//处理不在表单中的字段
+					//String fileName=item.getName();
 					if(!item.isFormField()) {
+						String fileName = new File(item.getName()).getName();
+						System.out.println("上传的文件名是："+fileName);
+						int len = fileName.length();
+						String suffix_str = fileName.substring(len-4);
+						System.out.println("后缀是："+suffix_str);
+						if(!suffix_str.equals("xlsx")) {
+							String message="上传答案文件失败，只接收.xlsx文件";
+							request.getSession().setAttribute("message", message);
+							response.sendRedirect("../Res.jsp");
+						}else {
+							String filePath = uploadPath + File.separator + LIST_NAME;
+							System.out.println(filePath);
+							File storeFile = new File(filePath);
+							//在控制台输出文件的上传路径
+							System.out.println(filePath);
+							//保存文件到硬盘
+							item.write(storeFile);
+							String message="该题目的测试集和答案已经成功上传";
+							request.getSession().setAttribute("message", message);
+							response.sendRedirect("../Res.jsp");
+						}
 						//String fileName = new File(item.getName()).getName();
-						String filePath = uploadPath + File.separator + LIST_NAME;
-						System.out.println(filePath);
-						File storeFile = new File(filePath);
-						//在控制台输出文件的上传路径
-						System.out.println(filePath);
-						//保存文件到硬盘
-						item.write(storeFile);
-						String message="该题目的测试集和答案已经成功上传";
-						request.getSession().setAttribute("message", message);
-						response.sendRedirect("../Res.jsp");
+						
 					}
 				}
 			}

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -109,17 +110,41 @@ public class UploadFileServlet extends HttpServlet {
 					//处理不在表单中的字段
 					if(!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
-						String filePath = uploadPath + File.separator + LIST_NAME;
-						//System.out.println(filePath);
-						File storeFile = new File(filePath);
-						//在控制台输出文件的上传路径
-						//System.out.println(filePath);
-						//保存文件到硬盘
-						item.write(storeFile);
-						String message="上传训练集成功";
-						request.getSession().setAttribute("message", message);
-						response.sendRedirect("../Res.jsp");
-						//response.sendRedirect("../AddTest.jsp");
+						System.out.println("上传的文件名是："+fileName);
+						int len = fileName.length();
+						String suffix_str = fileName.substring(len-4);
+						System.out.println("后缀是："+suffix_str);
+						if(!suffix_str.equals("xlsx")) {
+							String message="上传训练集文件失败，只接收.xlsx文件";
+							request.getSession().setAttribute("message", message);
+							response.sendRedirect("../Res.jsp");
+						}else {
+							String filePath = uploadPath + File.separator + LIST_NAME;
+							//System.out.println(filePath);
+							File storeFile = new File(filePath);
+							//在控制台输出文件的上传路径
+							//System.out.println(filePath);
+							//保存文件到硬盘
+							item.write(storeFile);
+							//更新老师界面的题目细节
+							List<Task> taskList = new ArrayList<Task>();
+							try {
+								taskList = t_dao.query();
+								//System.out.println("添加题目后的taskList是："+taskList);
+								//System.out.println(taskList);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+							
+							request.getSession().setAttribute("tasklist", taskList);
+							String message="上传训练集成功";
+							request.getSession().setAttribute("message", message);
+							response.sendRedirect("../Res.jsp");
+							//response.sendRedirect("../AddTest.jsp");
+						}
+						
 					}
 				}
 			}

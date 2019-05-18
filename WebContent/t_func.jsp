@@ -218,6 +218,7 @@
    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="checkTask">
         <div class="my-auto">
           <div class="mb-5">
+          <a href="/111/t_func.jsp">刷新</a>
 		        <table class="table table-striped table-bordered table-hover">
 		        	<thead>
 		    			 <tr>
@@ -241,22 +242,10 @@
    
     </div>
 
-    <!-- Bootstrap core JavaScript -->
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!--  
-	<script src="assets/js/jquery-1.8.2.min.js"></script>
-  
-    <script src="assets/js/supersized.3.2.7.min.js"></script>
-      <!-- 
-    <script src="assets/js/supersized-init.js"></script>
-
-    <script src="assets/js/scripts.js"></script>
-    -->
-    <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
 
   </body>

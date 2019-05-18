@@ -56,13 +56,13 @@ public class LoginServlet extends HttpServlet {
 			String db_password=t_temp.getT_password();
 			//System.out.println(db_password);
 			if(db_password==null) {
-				System.out.println("这个用户名不存在");
+				//System.out.println("这个用户名不存在");
 				String message="这个用户不存在";
 				request.getSession().setAttribute("message", message);
 				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("/t_logFail.jsp").forward(request, response);;
 				}else if(db_password.equals(t_password)) {
-					System.out.println("密码一致");
+					//System.out.println("密码一致");
 					Task t = new Task();
 					Task_Dao task_dao = new Task_Dao();
 					List<Task> taskList = new ArrayList<Task>();

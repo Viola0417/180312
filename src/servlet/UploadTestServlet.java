@@ -106,14 +106,24 @@ public class UploadTestServlet extends HttpServlet {
 					//处理不在表单中的字段
 					if(!item.isFormField()) {
 						String fileName = new File(item.getName()).getName();
-						String filePath = uploadPath + File.separator + LIST_NAME;
-						System.out.println(filePath);
-						File storeFile = new File(filePath);
-						//在控制台输出文件的上传路径
-						System.out.println(filePath);
-						//保存文件到硬盘
-						item.write(storeFile);
-						response.sendRedirect("../T_UploadAnswer.jsp");
+						System.out.println("上传的文件名是："+fileName);
+						int len = fileName.length();
+						String suffix_str = fileName.substring(len-4);
+						System.out.println("后缀是："+suffix_str);
+						if(!suffix_str.equals("xlsx")) {
+							String message="上传测试集文件失败，只接收.xlsx文件";
+							request.getSession().setAttribute("message", message);
+							response.sendRedirect("../Res.jsp");
+						}else {
+							String filePath = uploadPath + File.separator + LIST_NAME;
+							System.out.println(filePath);
+							File storeFile = new File(filePath);
+							//在控制台输出文件的上传路径
+							System.out.println(filePath);
+							//保存文件到硬盘
+							item.write(storeFile);
+							response.sendRedirect("../T_UploadAnswer.jsp");
+						}
 					}
 				}
 			}

@@ -103,7 +103,7 @@ public class DownloadTaskServlet extends HttpServlet {
 		        FileInputStream zipInput =new FileInputStream(zipFile);
 		        OutputStream out = response.getOutputStream();
 		        response.setContentType("application/octet-stream");
-		        String zip_name = task_id+".zip";
+		        String zip_name = task_id+"_train.zip";
 		        response.setHeader("Content-Disposition", "attachment; filename="+zip_name);
 		        while ((len=zipInput.read(buf))!= -1){  
 		            out.write(buf,0,len);  

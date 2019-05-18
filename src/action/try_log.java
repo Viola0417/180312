@@ -15,12 +15,11 @@ import entity.Task;
 public class try_log {
 	public static void main(String[] args) throws SQLException {
 		Log l = new Log();
+		int task_id=90;
 		String task_kind = "»Ø¹é";
 		Log_Dao l_dao = new Log_Dao();
-		Task_Dao t_dao = new Task_Dao();
-		int id=1;
-		int res = t_dao.CheckLogByTask(id);
-		System.out.println(res);
+		List<String> list = l_dao.QueryAlgobyTask(task_id);
+		System.out.println(list);
 		System.out.println("Ö´ÐÐ½áÊø");
 	}
 }

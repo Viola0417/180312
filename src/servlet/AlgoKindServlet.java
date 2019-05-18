@@ -46,7 +46,7 @@ public class AlgoKindServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		//查找数据库根据分类、回归、聚类得到图片
-
+		System.out.println("进入algokindservlet");
 		request.setCharacterEncoding("utf-8");
 		String path = request.getServletContext().getRealPath("./")+File.separator+"3.jpeg";
 		//System.out.println("存放图片路径为："+path);
@@ -61,7 +61,7 @@ public class AlgoKindServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();			
 		}
-		
+		System.out.println("回归正常");
 		path = request.getServletContext().getRealPath("./")+File.separator+"5.jpeg";
 		task_kind = "聚类";
 		try {
@@ -70,7 +70,7 @@ public class AlgoKindServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+		System.out.println("聚类正常");
 		
 		response.sendRedirect("../ShowAlgoKind.jsp");
 	}

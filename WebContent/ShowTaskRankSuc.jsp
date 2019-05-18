@@ -65,7 +65,7 @@
       
   
   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="allCase">
-        <div class="my-auto">>
+        <div class="my-auto">
           <div class="mb-5">
 			<h3>本题的所有完成情况</h3><br/>
 			<div class="container">

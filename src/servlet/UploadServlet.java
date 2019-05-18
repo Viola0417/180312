@@ -139,7 +139,7 @@ public class UploadServlet extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("message", "错误信息："+e.getMessage());
+			request.getSession().setAttribute("message", "请上传.xlsx为后缀的文件");
 		}
 			//跳转到message.jsp
 		response.sendRedirect("../Res.jsp");

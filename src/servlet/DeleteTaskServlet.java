@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import dao.Log_Dao;
 import dao.Student_Dao;
 import dao.Task_Dao;
 import entity.Student;
+import entity.Task;
 
 /**
  * Servlet implementation class DeleteTaskServlet
@@ -69,6 +72,16 @@ public class DeleteTaskServlet extends HttpServlet {
 					//题目存在的时候
 					t_dao.delTask(task_id);
 					l_dao.delLogbyTask(task_id);
+					List<Task> taskList = new ArrayList<Task>();
+					try {
+						taskList = t_dao.query();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					
+					request.getSession().setAttribute("tasklist", taskList);
 					String message="该题目以及关于其的做题记录已经成功删除";
 					request.getSession().setAttribute("message", message);
 					response.sendRedirect("../Res.jsp");

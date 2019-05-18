@@ -328,6 +328,12 @@ public class Log_Dao {
 		}
 		ptmt.close();
 		conn.close();
-		return algo_list;
+		List<String> new_list = new ArrayList<String>();
+		for(String s:algo_list) {
+			if(s!=null) {
+				new_list.add(s);
+			}
+		}
+		return new_list;
 	}
 }

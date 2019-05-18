@@ -17,12 +17,12 @@
 	  <div class="row">
 		    <div class="col-md-6">
 			    <h1>回归</h1>
-		    	<img src="<%=request.getContextPath() %>/4.jpeg" />&emsp;&emsp;
+		    	<img src="<%=request.getContextPath() %>/4.jpeg" />
 		    </div>
 		    <div class="col-md-6">
 			    <h1>聚类</h1>
 			    <img src="<%=request.getContextPath() %>/5.jpeg" />	    	
-				    </div>
+			</div>
 		</div>
 	</div> 
 </body>

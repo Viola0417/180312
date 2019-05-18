@@ -85,21 +85,18 @@ public class ShowTaskRankServlet extends HttpServlet {
 					List<Log> log_list = new ArrayList<Log>();
 					try {
 						log_list = l_dao.QueryByTaskNo(enterTask);
-						/*
-						 for(Log l:log_list) {
-							System.out.println(l.toString());
-						}
-						*/
 						request.getSession().setAttribute("log_list", log_list);
-						//String message = "为什么传不过来";
-						//request.getSession().setAttribute("message", message);
 						//计算学生排名
 						calculation c = new calculation();
 						List<F_stu_id> fs_list = new ArrayList<F_stu_id>();
 						fs_list = c.calRankByTask(enterTask);
+						System.out.print("排名里面应该有的数据++++++++++++++++++++++++++");
 						for(F_stu_id f:fs_list) {
 							System.out.println(f.toString());
 						}
+						System.out.println("++++++++++++++++++++++++++++++++");
+						System.out.println("排名队列"+fs_list);
+						
 						request.getSession().setAttribute("fs_list", fs_list);
 						//生成统计图
 						//先得到本题的F分布

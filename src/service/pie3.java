@@ -40,6 +40,7 @@ public class pie3 {
     // 画饼图
     public static void generatePieChart(String task_kind,String path) throws IOException, SQLException {
     	System.setProperty("java. awt.headless", "true");
+    	//System.out.println("进入Pie3函数，题目类别是"+task_kind);
     	DefaultPieDataset dpd = new DefaultPieDataset(); // 建立一个默认的饼图
     	DefaultPieDataset dataType = new DefaultPieDataset();   
         // 数据参数 内容，数量   
@@ -49,6 +50,7 @@ public class pie3 {
 		List<String> algo_list = new ArrayList<String>();
 		Task_Dao t_dao = new Task_Dao();
 		task_id_list = t_dao.queryIDbyKind(task_kind);
+		//System.out.println("回归的题目有："+task_id_list);
 		//System.out.println(task_id_list);
 		int a_num = 0;//记录SVM
 		int b_num = 0;//记录决策树
@@ -63,7 +65,7 @@ public class pie3 {
 			algo_list = l_dao.QueryAlgobyTask(task_id);
 			if(!algo_list.isEmpty()) {
 				for(String s:algo_list) {
-					//System.out.println(s);
+				//	System.out.println(s);
 					if(s.equals("SVM")) {
 						a_num++;
 					}else if(s.equals("决策树")) {
@@ -134,7 +136,7 @@ public class pie3 {
              // 底部   
         chart.getLegend().setItemFont(kfont);    
         OutputStream os = new FileOutputStream(path);//图片是文件格式的，故要用到FileOutputStream用来输出。
-        System.out.println(chart);
+        //System.out.println(chart);
         ChartUtilities.writeChartAsJPEG(os, chart, 500, 400);
         System.out.println("图片生成成功");
          
