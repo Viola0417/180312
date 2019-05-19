@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,9 +53,15 @@ public class TestNumServlet extends HttpServlet {
 			Task t = new Task();
 			Task_Dao t_dao = new Task_Dao();
 			int TaskNo = 0;
-			TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
-			//判断输入的题是否在数据库中
 			int enterTask = Integer.parseInt(task_id);
+			try {
+				TaskNo = t_dao.CheckLogByTask(enterTask);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+			//判断输入的题是否在数据库中
 			if(enterTask<0) {
 				System.out.println("该题格式输入有错");
 				String message="题号输入有误";
@@ -61,12 +69,12 @@ public class TestNumServlet extends HttpServlet {
 				response.sendRedirect("../Res.jsp");
 				
 			}
-			if(enterTask<=TaskNo&&enterTask>0) {
+			if(TaskNo==1) {
 				System.out.println("该题在数据库中");
 				request.getSession().setAttribute("task_id", task_id);
 				response.sendRedirect("../AddTestFile.jsp");
 				
-			}else{
+			}else if(TaskNo==0){
 				System.out.println("该题不在数据库中");
 				String message="该题不在数据库中";
 				request.getSession().setAttribute("message", message);

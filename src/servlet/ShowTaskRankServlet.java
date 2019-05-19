@@ -117,7 +117,7 @@ public class ShowTaskRankServlet extends HttpServlet {
 					}
 				}else {
 					//这题没有学生做答
-					String message="这道题还没有学生做答";
+					String message="这道题没有做答记录";
 					request.getSession().setAttribute("message", message);
 					response.sendRedirect("../Res.jsp");
 					//response.sendRedirect("../ShowTaskRankFail.jsp");
