@@ -60,6 +60,7 @@ public class TestNumServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println("TaskNo是"+TaskNo);
 			//TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
 			//判断输入的题是否在数据库中
 			if(enterTask<0) {

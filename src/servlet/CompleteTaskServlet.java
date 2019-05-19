@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,10 +54,18 @@ public class CompleteTaskServlet extends HttpServlet {
 			Task t = new Task();
 			Task_Dao t_dao = new Task_Dao();
 			int TaskNo = 0;
-			TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
-			//判断输入的题是否在数据库中
+			int res = 0;
 			int enterTask = Integer.parseInt(task_id);
-			if(enterTask<=TaskNo&&enterTask>0) {
+			try {
+				res = t_dao.CheckLogByTask(enterTask);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+			//判断输入的题是否在数据库中
+			//int enterTask = Integer.parseInt(task_id);
+			if(res==1) {
 				//System.out.println("要做答的题目在数据库中");
 				//把该题目存入session
 				request.getSession().setAttribute("task_id",enterTask);

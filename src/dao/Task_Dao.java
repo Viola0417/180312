@@ -118,7 +118,7 @@ public class Task_Dao {
 		}
 		ptmt.close();
 		conn.close();
-		//System.out.println("select count结果是："+res);
+		System.out.println("select count结果是："+res);
 		return res;
 	}
 
