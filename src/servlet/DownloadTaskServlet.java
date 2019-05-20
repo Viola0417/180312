@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -62,11 +63,18 @@ public class DownloadTaskServlet extends HttpServlet {
 		}else {
 			Task t = new Task();
 			Task_Dao t_dao = new Task_Dao();
-			int TaskNo = 0;
-			TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
+			int res = 0;
+			
+			//TaskNo = t_dao.SearchLastNum();//在数据库获取当前题的题号
 			//判断输入的题是否在数据库中
 			int enterTask = Integer.parseInt(task_id);
-			if(enterTask<=TaskNo&&enterTask>0) {
+			try {
+				res = t_dao.CheckLogByTask(enterTask);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(res==1) {
 
 				//System.out.println("压缩下载");
 				//尝试打包下载
@@ -116,7 +124,7 @@ public class DownloadTaskServlet extends HttpServlet {
 				
 			}else {
 				//System.out.println("这道题不在数据库中");
-				String message="题目号码不正确";
+				String message="该题目文件已经不存在，请联系老师";
 				request.getSession().setAttribute("message", message);
 				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);
