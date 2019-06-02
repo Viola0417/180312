@@ -51,11 +51,22 @@ public class DownloadTaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		int flag=0;
 		String task_id = request.getParameter("task_id1");
 		//String filename = null;
 		//System.out.println("准备下载task了");
 		request.setCharacterEncoding("utf-8");
-		if(task_id=="") {
+		for(int i=task_id.length();--i>=0;) {
+			if(!Character.isDigit(task_id.charAt(i))) {
+				flag=1;
+				break;
+			}			
+		}
+		if(flag==1) {
+			String message="输入题号不能包含字母";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+		}else if(task_id=="") {
 			//System.out.println("得到的值为空");
 			String message="输入题号不能为空";
 			request.getSession().setAttribute("message", message);
@@ -92,39 +103,47 @@ public class DownloadTaskServlet extends HttpServlet {
 		        //ZIP打包
 		        String zip_path =  request.getServletContext().getRealPath("./")+File.separator+"zip_train";
 		        File zipFile = new File(zip_path);
-		        byte[] buf = new byte[1024];
-		        int len;
-		        ZipOutputStream zout=new ZipOutputStream(new FileOutputStream(zipFile));
-		        for (int i = 0; i < inputs.length; i++) {  
-		            FileInputStream in =inputs[i];  
-		            zout.putNextEntry(new ZipEntry(names[i]));    
-		            while ((len = in.read(buf)) > 0) {  
-		                zout.write(buf, 0, len);  
-		            }  
-		            zout.closeEntry();  
-		            in.close();  
+		        if(zipFile.exists()) {
+		        	byte[] buf = new byte[1024];
+			        int len;
+			        ZipOutputStream zout=new ZipOutputStream(new FileOutputStream(zipFile));
+			        for (int i = 0; i < inputs.length; i++) {  
+			            FileInputStream in =inputs[i];  
+			            zout.putNextEntry(new ZipEntry(names[i]));    
+			            while ((len = in.read(buf)) > 0) {  
+			                zout.write(buf, 0, len);  
+			            }  
+			            zout.closeEntry();  
+			            in.close();  
+			        }
+			        zout.close();
+			        
+			        
+			        //System.out.println("下载zip");
+			        FileInputStream zipInput =new FileInputStream(zipFile);
+			        OutputStream out = response.getOutputStream();
+			        response.setContentType("application/octet-stream");
+			        String zip_name = task_id+"_train.zip";
+			        response.setHeader("Content-Disposition", "attachment; filename="+zip_name);
+			        while ((len=zipInput.read(buf))!= -1){  
+			            out.write(buf,0,len);  
+			        }
+			        zipInput.close();
+			        out.flush();
+			        out.close();
+			        //删除压缩包
+			        zipFile.delete();
+					
+		        }else {
+					System.out.println("文件不存在");
+					String message="文件不存在，请联系老师";
+					request.getSession().setAttribute("message", message);
+					response.sendRedirect("../Res.jsp");
 		        }
-		        zout.close();
 		        
-		        
-		        //System.out.println("下载zip");
-		        FileInputStream zipInput =new FileInputStream(zipFile);
-		        OutputStream out = response.getOutputStream();
-		        response.setContentType("application/octet-stream");
-		        String zip_name = task_id+"_train.zip";
-		        response.setHeader("Content-Disposition", "attachment; filename="+zip_name);
-		        while ((len=zipInput.read(buf))!= -1){  
-		            out.write(buf,0,len);  
-		        }
-		        zipInput.close();
-		        out.flush();
-		        out.close();
-		        //删除压缩包
-		        zipFile.delete();
-				
 			}else {
 				//System.out.println("这道题不在数据库中");
-				String message="该题目文件已经不存在，请联系老师";
+				String message="该题目不存在";
 				request.getSession().setAttribute("message", message);
 				response.sendRedirect("../Res.jsp");
 				//request.getRequestDispatcher("../downloadFail.jsp").forward(request, response);

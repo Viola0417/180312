@@ -42,9 +42,23 @@ public class DeleteStuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		int flag=0;
 		String s_id = request.getParameter("s_id");
+		System.out.println(s_id);
+		for(int i=s_id.length();--i>=0;) {
+			if(!Character.isDigit(s_id.charAt(i))) {
+				flag=1;
+				break;
+			}
+				
+		}
+		System.out.println("flag="+flag);
 		request.setCharacterEncoding("utf-8");
-		if(s_id=="") {
+		if(flag==1) {
+			String message="输入学号不能包含字母";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+		}else if(s_id=="") {
 			//System.out.println("得到的值为空");
 			String message="输入学号不能为空";
 			request.getSession().setAttribute("message", message);

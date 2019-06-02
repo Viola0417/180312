@@ -42,9 +42,20 @@ public class CompleteTaskServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		//System.out.println("学生准备做答题目");
+		int flag=0;
 		String task_id =request.getParameter("task_id2");
 		request.setCharacterEncoding("utf-8");
-		if(task_id=="") {
+		for(int i=task_id.length();--i>=0;) {
+			if(!Character.isDigit(task_id.charAt(i))) {
+				flag=1;
+				break;
+			}			
+		}
+		if(flag==1) {
+			String message="输入题号不能包含字母";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+		}else if(task_id=="") {
 			System.out.println("得到的值为空");
 			String message="输入题号不能为空";
 			request.getSession().setAttribute("message", message);

@@ -46,9 +46,20 @@ public class DeleteTaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		int flag=0;
 		String t_id = request.getParameter("t_id");
 		request.setCharacterEncoding("utf-8");
-		if(t_id=="") {
+		for(int i=t_id.length();--i>=0;) {
+			if(!Character.isDigit(t_id.charAt(i))) {
+				flag=1;
+				break;
+			}			
+		}
+		if(flag==1) {
+			String message="输入题号不能包含字母";
+			request.getSession().setAttribute("message", message);
+			response.sendRedirect("../Res.jsp");
+		}else if(t_id=="") {
 			//System.out.println("得到的值为空");
 			String message="输入题号不能为空";
 			request.getSession().setAttribute("message", message);
